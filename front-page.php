@@ -1,6 +1,6 @@
 <?php
 /**
- * 100% Exact Mirror Clone Homepage of PIP Global
+ * Bixtron Safety Handlers homepage
  */
 get_header();
 ?>

@@ -1,18 +1,18 @@
 /*
-Theme Name: Hello Elementor Child - PIP Global Replica
-Theme URI: https://pipglobal.com/
-Description: Complete 100% pixel-perfect mirror clone of PIP Global (Protective Industrial Products) built as a child theme for Hello Elementor. Features all 15 mirror pages (Homepage, Careers, Contact Us, Legal & Compliance, Global Locations, Sustainability, and all 9 Industrial Channels), responsive navigation, vector branding, self-hosted fonts, interactive JavaScript animations, and full Elementor builder support.
-Author: Antigravity
+Theme Name: Hello Elementor Child - Bixtron Safety Handlers
+Theme URI: https://bixtrons.com/
+Description: Bixtron Safety Handlers site theme: a child theme of Hello Elementor with a PIP-style layout (hero, brand wall, category tiles, red/black palette) filled with Bixtron's own content. Full WooCommerce shop with WhatsApp ordering and quote requests, company pages for Kenya and Uganda, and self-hosted fonts.
+Author: Bixtron Safety Handlers
 Author URI: https://bixtrons.com/
 Template: hello-elementor
-Version: 1.0.1
+Version: 2.0.0
 Text Domain: hello-elementor-pip
 */
 
 /* CSS Variables */
 :root {
-  --pip-red: #c8102e;
-  --pip-dark-red: #a50d24;
+  --pip-red: #1973ac;
+  --pip-dark-red: #135a88;
   --pip-yellow: #ffb81c;
   --pip-dark: #111827;
   --pip-slate: #1f2937;
@@ -115,7 +115,7 @@ header.site-header * {
   height: 15px !important;
   background: #ffffff !important;
   pointer-events: none !important;
-  z-index: 1001 !important;
+  z-index: 5 !important; /* behind the nav (z-index 10) so it never cuts across the logo tab */
 }
 
 /* 3. Navigation Wrapper */
@@ -336,7 +336,7 @@ header.site-header * {
    MOBILE HEADER ARCHITECTURE (max-width: 800px)
    Matches PIP Global Mobile Layout: Centered Logo on Row 1, Nav Items Row 2
    ========================================================================== */
-@media (max-width: 800px) {
+@media (max-width: 1040px) {
   body {
     padding-top: 130px !important;
   }

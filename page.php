@@ -1,33 +1,42 @@
 <?php
 /**
- * Smart Slug-Based Page Router with Elementor Fallback
+ * Page router.
  *
- * Automatically routes matching PIP slugs to their mirror templates
- * while fully supporting native Elementor Builder content!
+ * - Company pages (about, contact, our-locations, quality-certifications, legal) always use the
+ *   Bixtron templates in template-parts/content-{slug}.php, even if the page was built in Elementor.
+ * - Other pages built with Elementor render their Elementor content.
+ * - Everything else (cart, checkout, my-account, request-quote, policies ...) is shown inside the
+ *   PIP header/footer with a standard page hero.
  *
  * @package HelloElementorPip
  */
 
 get_header();
 
-$slug = get_post_field( 'post_name', get_post() );
+$slug        = get_post_field( 'post_name', get_post() );
 $custom_part = 'template-parts/content-' . $slug;
+$is_company  = in_array( $slug, array_keys( bx_required_pages() ), true ) && locate_template( $custom_part . '.php' );
 
-// Check if page was built with Elementor
-$is_elementor = did_action( 'elementor/loaded' ) && \Elementor\Plugin::$instance->documents->get( get_the_ID() ) && \Elementor\Plugin::$instance->documents->get( get_the_ID() )->is_built_with_elementor();
+$is_elementor = false;
+if ( did_action( 'elementor/loaded' ) && class_exists( '\Elementor\Plugin' ) ) {
+    $doc          = \Elementor\Plugin::$instance->documents->get( get_the_ID() );
+    $is_elementor = $doc && $doc->is_built_with_elementor();
+}
 
-if ( $is_elementor ) {
-    while ( have_posts() ) : the_post();
+if ( $is_company ) {
+    get_template_part( $custom_part );
+} elseif ( $is_elementor ) {
+    while ( have_posts() ) :
+        the_post();
         the_content();
     endwhile;
-} elseif ( locate_template( $custom_part . '.php' ) ) {
-    get_template_part( $custom_part );
 } else {
-    while ( have_posts() ) : the_post();
+    while ( have_posts() ) :
+        the_post();
+        bx_page_hero( get_the_title() );
         ?>
-        <div class="site-content" id="content" style="padding: 60px 20px; max-width: 1200px; margin: 0 auto;">
-            <h1><?php the_title(); ?></h1>
-            <div class="entry-content" style="margin-top: 30px; line-height: 1.8;">
+        <div class="bx-page bx-page--content">
+            <div class="entry-content">
                 <?php the_content(); ?>
             </div>
         </div>

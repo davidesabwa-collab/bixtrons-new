@@ -92,6 +92,8 @@
 
         // Other parent links dropdowns (Our Brands, Channels We Serve)
         $('.parent-link:not(.show_gbl_loc)').on('mouseenter', function() {
+            // Touch screens fire mouseenter and then click for one tap: remember it so the click does not close the menu again.
+            $(this).data('hoverAt', Date.now());
             $(this).children('ul').addClass('menu-open').css({'display': 'block', 'opacity': '1'});
         }).on('mouseleave', function() {
             $(this).children('ul').removeClass('menu-open').css({'display': 'none', 'opacity': '0'});
@@ -100,8 +102,13 @@
         $('.parent-link:not(.show_gbl_loc) > span').on('click', function(e) {
             e.stopPropagation();
             var $ul = $(this).siblings('ul');
+            var justHovered = (Date.now() - ($(this).parent().data('hoverAt') || 0)) < 700;
             $('.parent-link ul').not($ul).removeClass('menu-open').css({'display': 'none', 'opacity': '0'});
-            $ul.toggleClass('menu-open');
+            if (justHovered) {
+                $ul.addClass('menu-open');
+            } else {
+                $ul.toggleClass('menu-open');
+            }
             if ($ul.hasClass('menu-open')) {
                 $ul.css({'display': 'block', 'opacity': '1'});
             } else {

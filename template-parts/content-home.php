@@ -1,6 +1,6 @@
 <?php
 /**
- * Template part for Home
+ * Template part for Home (Bixtron Safety Handlers)
  */
 ?>
 <div class="site-content" id="content" style="padding:0;">
@@ -35,12 +35,9 @@
                 })();
                 </script>
 <div id="WWPIE-Header">
-<div class="new-worker-left">
-<img alt="industry worker looking cool" src="<?php echo pip_asset('images/wwpie-worker.webp'); ?>"/>
-</div>
 <div class="hero-text-container">
-<h1>WHAT WE <br class="mobile-break"/>PROTECT IS <br/><span>EVERYTHING<span>.</span><sup>™</sup></span></h1>
-<h2><span class="hero-subtext__phrase">YOUR PEOPLE.</span> <span class="hero-subtext__phrase">YOUR TIME.</span> <span class="hero-subtext__phrase">YOUR BUSINESS.</span></h2>
+<h1>SAFETY <br class="mobile-break"/>WITHOUT <br/><span>COMPROMISE<span>.</span></span></h1>
+<h2><span class="hero-subtext__phrase">YOUR PEOPLE.</span> <span class="hero-subtext__phrase">YOUR WORKPLACE.</span> <span class="hero-subtext__phrase">YOUR BUSINESS.</span></h2>
 </div>
 <img alt="" class="hero-red-chevron" src="<?php echo pip_asset('images/wwpie-chevron.webp'); ?>"/>
 </div> <!-- END WWPIE-Header-->
@@ -71,463 +68,149 @@ gsap/CSSPlugin.js:
 //# sourceMappingURL=home-hero.min.js.map
                 </script>
 <div class="hero__nav-links">
-<a class="nav-links__link" href="https://us.pipglobal.com/en/about-us/news-and-events/?type=pr">News</a>
-<a class="nav-links__link" href="<?php echo esc_url( home_url( '/legal/' ) ); ?>">Legal</a>
-<a class="nav-links__link" href="<?php echo esc_url( home_url( '/sustainability/' ) ); ?>">Sustainability</a>
+<a class="nav-links__link" href="<?php echo esc_url( function_exists( 'wc_get_page_permalink' ) ? wc_get_page_permalink( 'shop' ) : home_url( '/shop/' ) ); ?>">Shop</a>
+<a class="nav-links__link" href="<?php echo esc_url( home_url( '/#industrial-channels' ) ); ?>">Products</a>
+<a class="nav-links__link" href="<?php echo esc_url( home_url( '/#key-brands' ) ); ?>">Brands</a>
+<a class="nav-links__link" href="<?php echo esc_url( home_url( '/request-quote/' ) ); ?>">Get a Quote</a>
 <a class="nav-links__link" href="<?php echo esc_url( home_url( '/our-locations/' ) ); ?>">Locations</a>
-<a class="nav-links__link" href="<?php echo esc_url( home_url( '/contact-us/' ) ); ?>">Contact Us</a>
-<a class="nav-links__link" href="<?php echo esc_url( home_url( '/career/' ) ); ?>">Careers</a>
+<a class="nav-links__link" href="<?php echo esc_url( home_url( '/contact/' ) ); ?>">Contact Us</a>
 </div>
 </div>
 <!-- END: Hero Banner -->
-<!--Key Brands-->
+<?php
+$bx_company = bx_company();
+$bx_cats    = bx_top_categories( 12 );
+$bx_shop    = function_exists( 'wc_get_page_permalink' ) ? wc_get_page_permalink( 'shop' ) : home_url( '/shop/' );
+
+// Featured products, falling back to the newest ones.
+$bx_products = array();
+if ( function_exists( 'wc_get_products' ) ) {
+    $bx_products = wc_get_products( array( 'status' => 'publish', 'limit' => 8, 'featured' => true ) );
+    if ( count( $bx_products ) < 8 ) {
+        $bx_products = wc_get_products( array( 'status' => 'publish', 'limit' => 8, 'orderby' => 'date', 'order' => 'DESC' ) );
+    }
+}
+?>
+<!-- START: Brands -->
 <div class="site-content__key-brands" id="key-brands">
 <div class="brands-header-main">
-<h2 class="brands-header-main__title">Industrial<br/>Brands</h2>
-<img alt="Chevron" class="brands-header-main__chev" src="<?php echo pip_asset('images/brands/white-chevrons-down.svg'); ?>"/>
+<h2 class="brands-header-main__title">Our<br/>Brands</h2>
+<img alt="Chevron" class="brands-header-main__chev" src="<?php echo esc_url( pip_asset( 'images/brands/white-chevrons-down.svg' ) ); ?>"/>
 </div>
-<div class="key-brands-container">
+<div class="key-brands-container bx-brands">
+<?php foreach ( bx_brands() as $bx_brand ) : ?>
 <div class="brands__brand-section reg-logo">
-<a aria-label="Open new tab to https://us.pipglobal.com/en/brand/boss/" href="https://us.pipglobal.com/en/brand/boss/" target="_blank">
-<img alt="Boss" src="<?php echo pip_asset('images/brands/logos/Boss.svg'); ?>"/>
-</a>
+<?php if ( $bx_brand['url'] ) : ?><a aria-label="<?php echo esc_attr( $bx_brand['name'] ); ?>" href="<?php echo esc_url( $bx_brand['url'] ); ?>" rel="noopener" target="_blank"><?php endif; ?>
+<img alt="<?php echo esc_attr( $bx_brand['name'] ); ?>" src="<?php echo esc_url( pip_asset( 'images/bixtron/brands/' . $bx_brand['logo'] ) ); ?>"/>
+<?php if ( $bx_brand['url'] ) : ?></a><?php endif; ?>
 </div>
-<div class="brands__brand-section reg-logo">
-<a aria-label="Open new tab to https://us.pipglobal.com/en/brand/jsp/" href="https://us.pipglobal.com/en/brand/jsp/" target="_blank">
-<img alt="JSP" src="<?php echo pip_asset('images/brands/logos/JSP.svg'); ?>"/>
-</a>
-</div>
-<div class="brands__brand-section reg-logo">
-<a aria-label="Open new tab to https://us.pipglobal.com/en/brand/gtek/" href="https://us.pipglobal.com/en/brand/gtek/" target="_blank">
-<img alt="G-Tek" src="<?php echo pip_asset('images/brands/logos/G-Tek.svg'); ?>"/>
-</a>
-</div>
-<div class="brands__brand-section reg-logo">
-<a aria-label="Open new tab to https://us.pipglobal.com/en/brand/bisley/" href="https://us.pipglobal.com/en/brand/bisley/" target="_blank">
-<img alt="Bisley" src="<?php echo pip_asset('images/brands/logos/Bisley.svg'); ?>"/>
-</a>
-</div>
-<div class="brands__brand-section reg-logo">
-<a aria-label="Open new tab to https://us.pipglobal.com/en/brand/ambidex/" href="https://us.pipglobal.com/en/brand/ambidex/" target="_blank">
-<img alt="Ambi-Dex" src="<?php echo pip_asset('images/brands/logos/Ambi-Dex.svg'); ?>"/>
-</a>
-</div>
-<div class="brands__brand-section alt-logo" id="Caiman-logo">
-<a aria-label="Open new tab to https://us.pipglobal.com/en/brand/caiman/" href="https://us.pipglobal.com/en/brand/caiman/" target="_blank">
-<img alt="Caiman" class="img-blk" src="<?php echo pip_asset('images/brands/logos/black/Caiman.svg'); ?>"/>
-<img alt="Caiman" class="img-color" src="<?php echo pip_asset('images/brands/logos/Caiman.svg'); ?>"/>
-<img alt="Caiman" class="just-for-space" src="<?php echo pip_asset('images/brands/logos/Caiman.svg'); ?>"/>
-</a>
-</div>
-<div class="brands__brand-section reg-logo">
-<a aria-label="Open new tab to https://us.pipglobal.com/en/brand/fibre-metal/" href="https://us.pipglobal.com/en/brand/fibre-metal/" target="_blank">
-<img alt="Fibre-Metal" src="<?php echo pip_asset('images/brands/logos/Fibre-Metal.svg'); ?>"/>
-</a>
-</div>
-<div class="brands__brand-section reg-logo">
-<a aria-label="Open new tab to https://us.pipglobal.com/en/brand/howard-leight/" href="https://us.pipglobal.com/en/brand/howard-leight/" target="_blank">
-<img alt="Howard-Leight" src="<?php echo pip_asset('images/brands/logos/Howard-Leight.svg'); ?>"/>
-</a>
-</div>
-<div class="brands__brand-section alt-logo" id="Fend-all-logo">
-<a aria-label="Open new tab to https://us.pipglobal.com/en/brand/fendall/" href="https://us.pipglobal.com/en/brand/fendall/" target="_blank">
-<img alt="Fend-all" class="img-blk" src="<?php echo pip_asset('images/brands/logos/black/Fend-all.svg'); ?>"/>
-<img alt="Fend-all" class="img-color" src="<?php echo pip_asset('images/brands/logos/Fend-all.svg'); ?>"/>
-<img alt="Fend-all" class="just-for-space" src="<?php echo pip_asset('images/brands/logos/Fend-all.svg'); ?>"/>
-</a>
-</div>
-<div class="brands__brand-section reg-logo">
-<a aria-label="Open new tab to https://www.puma-safety.com/eu/gb" href="https://www.puma-safety.com/eu/gb" target="_blank">
-<img alt="PUMA-Safety" src="<?php echo pip_asset('images/brands/logos/PUMA-Safety.svg'); ?>"/>
-</a>
-</div>
-<div class="brands__brand-section reg-logo">
-<a aria-label="Open new tab to https://us.pipglobal.com/en/brand/grippaz/" href="https://us.pipglobal.com/en/brand/grippaz/" target="_blank">
-<img alt="Grippaz" src="<?php echo pip_asset('images/brands/logos/Grippaz.svg'); ?>"/>
-</a>
-</div>
-<div class="brands__brand-section reg-logo">
-<a aria-label="Open new tab to https://us.pipglobal.com/en/brand/north/" href="https://us.pipglobal.com/en/brand/north/" target="_blank">
-<img alt="North" src="<?php echo pip_asset('images/brands/logos/North.svg'); ?>"/>
-</a>
-</div>
-<div class="brands__brand-section reg-logo">
-<a aria-label="Open new tab to https://thorzt.com/" href="https://thorzt.com/" target="_blank">
-<img alt="Thorzt" src="<?php echo pip_asset('images/brands/logos/Thorzt.svg'); ?>"/>
-</a>
-</div>
-<div class="brands__brand-section reg-logo">
-<a aria-label="Open new tab to https://us.pipglobal.com/en/brand/miller/" href="https://us.pipglobal.com/en/brand/miller/" target="_blank">
-<img alt="Miller" src="<?php echo pip_asset('images/brands/logos/Miller.svg'); ?>"/>
-</a>
+<?php endforeach; ?>
 </div>
 </div>
-<div class="other-brands-container">
-<div>
-<div class="other-header">
-<small>OTHER BRANDS</small>
-<h3>AMERICAS</h3>
-<img alt="Chevron" src="<?php echo pip_asset('images/brands/red-chevrons-down.svg'); ?>"/>
-</div>
-<div class="other-container">
-<div class="other-brand-section">
-<a aria-label="Open new tab to https://www.atg-glovesolutions.com/en" href="https://www.atg-glovesolutions.com/en" target="_blank">
-<img alt="ATG" src="<?php echo pip_asset('images/brands/logos/white/ATG.svg'); ?>"/>
-</a>
-</div>
-<div class="other-brand-section">
-<a aria-label="Open new tab to https://us.pipglobal.com/en/brand/uvex/" href="https://us.pipglobal.com/en/brand/uvex/" target="_blank">
-<img alt="UVEX" src="<?php echo pip_asset('images/brands/logos/white/UVEX.svg'); ?>"/>
-</a>
-</div>
-<div class="other-brand-section">
-<a aria-label="Open new tab to https://us.pipglobal.com/en/salisbury/sign-up/" href="https://us.pipglobal.com/en/salisbury/sign-up/" target="_blank">
-<img alt="Salisbury" src="<?php echo pip_asset('images/brands/logos/white/Salisbury.svg'); ?>"/>
-</a>
-</div>
-<div class="other-brand-section">
-<a aria-label="Open new tab to https://us.pipglobal.com/en/mp/morning-pride-signup/" href="https://us.pipglobal.com/en/mp/morning-pride-signup/" target="_blank">
-<img alt="Morning-Pride" src="<?php echo pip_asset('images/brands/logos/white/Morning-Pride.svg'); ?>"/>
-</a>
-</div>
-<div class="other-brand-section">
-<a aria-label="Open new tab to https://us.pipglobal.com/en/brand/uniformtech/" href="https://us.pipglobal.com/en/brand/uniformtech/" target="_blank">
-<img alt="Uniform-Technology" src="<?php echo pip_asset('images/brands/logos/white/Uniform-Technology.svg'); ?>"/>
-</a>
-</div>
-</div>
-</div>
-<div>
-<div class="other-header">
-<small>OTHER BRANDS</small>
-<h3>EUROPE</h3>
-<img alt="Chevron" src="<?php echo pip_asset('images/brands/red-chevrons-down.svg'); ?>"/>
-</div>
-<div class="other-container">
-<div class="other-brand-section">
-<a aria-label="Open new tab to https://www.ism-europa.de/en/" href="https://www.ism-europa.de/en/" target="_blank">
-<img alt="Albatros" src="<?php echo pip_asset('images/brands/logos/white/Albatros.svg'); ?>"/>
-</a>
-</div>
-<div class="other-brand-section">
-<a aria-label="Open new tab to https://www.issaline.com/en/" href="https://www.issaline.com/en/" target="_blank">
-<img alt="Issaline" src="<?php echo pip_asset('images/brands/logos/white/Issaline.svg'); ?>"/>
-</a>
-</div>
-<div class="other-brand-section">
-<a aria-label="Open new tab to https://eu.pipglobal.com/en/brand/kcl/" href="https://eu.pipglobal.com/en/brand/kcl/" target="_blank">
-<img alt="KCL" src="<?php echo pip_asset('images/brands/logos/white/KCL.svg'); ?>"/>
-</a>
-</div>
-<div class="other-brand-section">
-<a aria-label="Open new tab to https://www.pip-hsp.com/" href="https://www.pip-hsp.com/" target="_blank">
-<img alt="Combisafe" src="<?php echo pip_asset('images/brands/logos/white/Combisafe.svg'); ?>"/>
-</a>
-</div>
-<div class="other-brand-section">
-<a aria-label="Open new tab to https://eu.pipglobal.com/en/brand/miller-soll/" href="https://eu.pipglobal.com/en/brand/miller-soll/" target="_blank">
-<img alt="Soll" src="<?php echo pip_asset('images/brands/logos/white/Soll.svg'); ?>"/>
-</a>
-</div>
-<div class="other-brand-section">
-<a aria-label="Open new tab to https://eu.pipglobal.com/en/brand/mts/" href="https://eu.pipglobal.com/en/brand/mts/" target="_blank">
-<img alt="MTS" src="<?php echo pip_asset('images/brands/logos/white/MTS.svg'); ?>"/>
-</a>
-</div>
-</div>
-</div>
-<div>
-<div class="other-header">
-<small>OTHER BRANDS</small>
-<h3>AUSTRALIA</h3>
-<img alt="Chevron" src="<?php echo pip_asset('images/brands/red-chevrons-down.svg'); ?>"/>
-</div>
-<div class="other-container">
-<div class="other-brand-section">
-<a aria-label="Open new tab to https://prochoicesafetygear.com/" href="https://prochoicesafetygear.com/" target="_blank">
-<img alt="Pro-Choice-Safety" src="<?php echo pip_asset('images/brands/logos/white/Pro-Choice-Safety.svg'); ?>"/>
-</a>
-</div>
-<div class="other-brand-section">
-<a aria-label="Open new tab to https://au.prattsafety.com/" href="https://au.prattsafety.com/" target="_blank">
-<img alt="Pratt" src="<?php echo pip_asset('images/brands/logos/white/Pratt.svg'); ?>"/>
-</a>
-</div>
-<div class="other-brand-section">
-<a aria-label="Open new tab to https://mediqfirstaid.com.au/" href="https://mediqfirstaid.com.au/" target="_blank">
-<img alt="MEDIQ" src="<?php echo pip_asset('images/brands/logos/white/MEDIQ.svg'); ?>"/>
-</a>
-</div>
-<div class="other-brand-section">
-<a aria-label="Open new tab to https://www.pip-hsp.com/" href="https://www.pip-hsp.com/" target="_blank">
-<img alt="Oliver" src="<?php echo pip_asset('images/brands/logos/white/Oliver.svg'); ?>"/>
-</a>
-</div>
-<div class="other-brand-section">
-<a aria-label="Open new tab to https://au.linqhs.com/" href="https://au.linqhs.com/" target="_blank">
-<img alt="LINQ" src="<?php echo pip_asset('images/brands/logos/white/LINQ.svg'); ?>"/>
-</a>
-</div>
-</div>
-</div>
-<div>
-<div class="other-header">
-<small>OTHER BRANDS</small>
-<h3>ASIA</h3>
-<img alt="Chevron" src="<?php echo pip_asset('images/brands/red-chevrons-down.svg'); ?>"/>
-</div>
-<div class="other-container">
-<div class="other-brand-section">
-<a aria-label="Open new tab to https://www.atg-glovesolutions.com/en" href="https://www.atg-glovesolutions.com/en" target="_blank">
-<img alt="ATG" src="<?php echo pip_asset('images/brands/logos/white/ATG.svg'); ?>"/>
-</a>
-</div>
-<div class="other-brand-section">
-<a aria-label="Open new tab to https://www.pip-hsp.com/" href="https://www.pip-hsp.com/" target="_blank">
-<img alt="Kings" src="<?php echo pip_asset('images/brands/logos/white/Kings.svg'); ?>"/>
-</a>
-</div>
-</div>
-</div>
-</div>
-</div>
-<!-- START: Industrial Markets -->
+<!-- END: Brands -->
+
+<!-- START: Product categories -->
 <div class="site-content__channels" id="industrial-channels">
 <div class="channels__title">
-<h2>Industrial Safety Markets</h2>
+<h2>Shop by Category</h2>
 </div>
-<style>#channel-automotive-and-metal-fabrication{ background-image: url('<?php echo pip_asset('images/video-tiles/automotive-and-metal-fabrication-still.jpg'); ?>'); }#channel-automotive-and-metal-fabrication:hover { background-image: url('<?php echo pip_asset('images/gifcompressor/automotive-and-metal-fabrication.gif'); ?>'); }</style>
-<section class="animation-element slide-up video-small" id="automotive-and-metal-fabrication">
-<a href="<?php echo esc_url( home_url( '/automotive-and-metal-fabrication-channel/' ) ); ?>">
-<div class="full-wrap" id="channel-automotive-and-metal-fabrication">
+<?php foreach ( $bx_cats as $bx_i => $bx_cat ) :
+    $bx_id = 'bx-cat-' . (int) $bx_cat['term']->term_id; ?>
+<style>#channel-<?php echo esc_attr( $bx_id ); ?>{ background-image: url('<?php echo esc_url( $bx_cat['image'] ); ?>'); }</style>
+<section class="animation-element slide-up video-small bx-tile" id="<?php echo esc_attr( $bx_id ); ?>">
+<a href="<?php echo esc_url( $bx_cat['url'] ); ?>">
+<div class="full-wrap" id="channel-<?php echo esc_attr( $bx_id ); ?>">
 <div class="title-wrap" style="pointer-events:none;">
-<h2>Automotive and Metal Fabrication</h2>
+<h2><?php echo esc_html( $bx_cat['name'] ); ?></h2>
+<p class="bx-tile__count"><?php echo esc_html( sprintf( _n( '%d product', '%d products', $bx_cat['count'], 'hello-elementor-pip' ), $bx_cat['count'] ) ); ?></p>
 </div>
 </div>
 </a>
 </section>
-<style>#channel-construction{ background-image: url('<?php echo pip_asset('images/video-tiles/construction-still.jpg'); ?>'); }#channel-construction:hover { background-image: url('<?php echo pip_asset('images/gifcompressor/construction.gif'); ?>'); }</style>
-<section class="animation-element slide-up video-small" id="construction">
-<a href="<?php echo esc_url( home_url( '/construction-channel/' ) ); ?>">
-<div class="full-wrap" id="channel-construction">
+<?php endforeach; ?>
+<section class="animation-element slide-up video-small bx-tile bx-tile--all" id="bx-cat-all">
+<a href="<?php echo esc_url( $bx_shop ); ?>">
+<div class="full-wrap">
 <div class="title-wrap" style="pointer-events:none;">
-<h2>Construction</h2>
-</div>
-</div>
-</a>
-</section>
-<style>#channel-controlled-environment{ background-image: url('<?php echo pip_asset('images/video-tiles/controlled-environment-still.jpg'); ?>'); }#channel-controlled-environment:hover { background-image: url('<?php echo pip_asset('images/gifcompressor/controlled-environment.gif'); ?>'); }</style>
-<section class="animation-element slide-up video-small" id="controlled-environment">
-<a href="<?php echo esc_url( home_url( '/controlled-environment-channel/' ) ); ?>">
-<div class="full-wrap" id="channel-controlled-environment">
-<div class="title-wrap" style="pointer-events:none;">
-<h2>Controlled Environment</h2>
-</div>
-</div>
-</a>
-</section>
-<style>#channel-electrical-safety{ background-image: url('<?php echo pip_asset('images/video-tiles/electrical-safety-still.jpg'); ?>'); }#channel-electrical-safety:hover { background-image: url('<?php echo pip_asset('images/gifcompressor/electrical-safety.gif'); ?>'); }</style>
-<section class="animation-element slide-up video-small" id="electrical-safety">
-<a href="<?php echo esc_url( home_url( '/electricity-channel/' ) ); ?>">
-<div class="full-wrap" id="channel-electrical-safety">
-<div class="title-wrap" style="pointer-events:none;">
-<h2>Electrical Safety</h2>
-</div>
-</div>
-</a>
-</section>
-<style>#channel-facility-care-and-waste-management{ background-image: url('<?php echo pip_asset('images/video-tiles/facility-care-and-waste-management-still.jpg'); ?>'); }#channel-facility-care-and-waste-management:hover { background-image: url('<?php echo pip_asset('images/gifcompressor/facility-care-and-waste-management.gif'); ?>'); }</style>
-<section class="animation-element slide-up video-small" id="facility-care-and-waste-management">
-<a href="<?php echo esc_url( home_url( '/facility-care-and-waste-management-channel/' ) ); ?>">
-<div class="full-wrap" id="channel-facility-care-and-waste-management">
-<div class="title-wrap" style="pointer-events:none;">
-<h2>Facility Care and waste management</h2>
-</div>
-</div>
-</a>
-</section>
-<style>#channel-food-processing{ background-image: url('<?php echo pip_asset('images/video-tiles/food-processing-still.jpg'); ?>'); }#channel-food-processing:hover { background-image: url('<?php echo pip_asset('images/gifcompressor/food-processing.gif'); ?>'); }</style>
-<section class="animation-element slide-up video-small" id="food-processing">
-<a href="<?php echo esc_url( home_url( '/food-processing-channel/' ) ); ?>">
-<div class="full-wrap" id="channel-food-processing">
-<div class="title-wrap" style="pointer-events:none;">
-<h2>Food Processing</h2>
-</div>
-</div>
-</a>
-</section>
-<style>#channel-industrial{ background-image: url('<?php echo pip_asset('images/video-tiles/industrial-still.jpg'); ?>'); }#channel-industrial:hover { background-image: url('<?php echo pip_asset('images/gifcompressor/industrial.gif'); ?>'); }</style>
-<section class="animation-element slide-up video-small" id="industrial">
-<a href="<?php echo esc_url( home_url( '/industrial-channel/' ) ); ?>">
-<div class="full-wrap" id="channel-industrial">
-<div class="title-wrap" style="pointer-events:none;">
-<h2>Industrial</h2>
-</div>
-</div>
-</a>
-</section>
-<style>#channel-welding{ background-image: url('<?php echo pip_asset('images/video-tiles/welding-still.jpg'); ?>'); }#channel-welding:hover { background-image: url('<?php echo pip_asset('images/gifcompressor/welding.gif'); ?>'); }</style>
-<section class="animation-element slide-up video-small" id="welding">
-<a href="<?php echo esc_url( home_url( '/welding-channel/' ) ); ?>">
-<div class="full-wrap" id="channel-welding">
-<div class="title-wrap" style="pointer-events:none;">
-<h2>Welding</h2>
-</div>
-</div>
-</a>
-</section>
-<style>#channel-oil-and-gas{ background-image: url('<?php echo pip_asset('images/video-tiles/oil-and-gas-still.jpg'); ?>'); }#channel-oil-and-gas:hover { background-image: url('<?php echo pip_asset('images/gifcompressor/oil-and-gas.gif'); ?>'); }</style>
-<section class="animation-element slide-up video-small" id="oil-and-gas">
-<a href="<?php echo esc_url( home_url( '/oil-and-gas-channel/' ) ); ?>">
-<div class="full-wrap" id="channel-oil-and-gas">
-<div class="title-wrap" style="pointer-events:none;">
-<h2>Oil and Gas</h2>
+<h2>Shop All Products</h2>
+<p class="bx-tile__count">Browse the full catalogue</p>
 </div>
 </div>
 </a>
 </section>
 </div>
-<!-- END: Industrial Markets -->
-<!-- START: Industrial Brands -->
-<!-- <div id="industrial-brands" class="site-content__brands">
+<!-- END: Product categories -->
 
-                <h2 class="brands__title"><a href="https://us.pipglobal.com/en/" style="text-decoration:none;" target="_blank" aria-label="Open new tab to us.pipglobal.com">PIP Industrial Brands</a><br>
-                <small><a href="https://us.pipglobal.com/en/" style="text-decoration:none;" target="_blank" aria-label="Open new tab to us.pipglobal.com">GO TO WEBSITE</a></small>
-                </h2>
+<?php if ( $bx_products ) : ?>
+<!-- START: Featured products -->
+<div class="bx-section bx-featured" id="featured-products">
+<div class="bx-section__head">
+<h2>Featured Products</h2>
+<a class="bx-link" href="<?php echo esc_url( $bx_shop ); ?>">View all products &rarr;</a>
+</div>
+<div class="bx-grid">
+<?php foreach ( $bx_products as $bx_p ) :
+    $bx_img = $bx_p->get_image_id() ? wp_get_attachment_image_url( $bx_p->get_image_id(), 'woocommerce_thumbnail' ) : wc_placeholder_img_src();
+    $bx_msg = 'Hello Bixtron, I would like to order: ' . $bx_p->get_name() . ' ' . get_permalink( $bx_p->get_id() ); ?>
+<article class="bx-card">
+<a class="bx-card__img" href="<?php echo esc_url( get_permalink( $bx_p->get_id() ) ); ?>"><img alt="<?php echo esc_attr( $bx_p->get_name() ); ?>" loading="lazy" src="<?php echo esc_url( $bx_img ); ?>"/></a>
+<h3 class="bx-card__title"><a href="<?php echo esc_url( get_permalink( $bx_p->get_id() ) ); ?>"><?php echo esc_html( wp_strip_all_tags( $bx_p->get_name() ) ); ?></a></h3>
+<div class="bx-card__actions">
+<a class="bx-btn bx-btn--red" href="<?php echo esc_url( get_permalink( $bx_p->get_id() ) ); ?>">View</a>
+<a class="bx-btn bx-btn--ghost" href="<?php echo esc_url( bx_whatsapp_url( $bx_msg ) ); ?>" rel="noopener" target="_blank">WhatsApp</a>
+</div>
+</article>
+<?php endforeach; ?>
+</div>
+</div>
+<!-- END: Featured products -->
+<?php endif; ?>
 
-                
+<!-- START: What we do -->
+<div class="testimonial bx-services" id="what-we-do">
+<div class="container">
+<h3 class="space">What We Do</h3>
+<div class="bx-services__grid">
+<?php foreach ( $bx_company['services'] as $bx_s ) : ?>
+<div class="bx-services__item">
+<h4><?php echo esc_html( $bx_s['title'] ); ?></h4>
+<p><?php echo esc_html( $bx_s['text'] ); ?></p>
+</div>
+<?php endforeach; ?>
+</div>
+</div>
+</div>
+<!-- END: What we do -->
 
-            </div>  -->
-<!-- END: Industrial Brands -->
-<!-- START: Specialty Markets -->
-<!-- <div id="specialty-channels" class="site-content__channels">
+<!-- START: Why Bixtron + certifications -->
+<div class="bx-section bx-why" id="why-bixtron">
+<div class="bx-section__head"><h2>Why Bixtron</h2></div>
+<div class="bx-why__grid">
+<?php foreach ( $bx_company['strengths'] as $bx_s ) : ?>
+<div class="bx-why__item">
+<h3><?php echo esc_html( $bx_s['title'] ); ?></h3>
+<p><?php echo esc_html( $bx_s['text'] ); ?></p>
+</div>
+<?php endforeach; ?>
+</div>
+<div class="bx-certs">
+<?php foreach ( $bx_company['certs'] as $bx_c ) : ?>
+<div class="bx-certs__item"><strong><?php echo esc_html( $bx_c['code'] ); ?></strong><span><?php echo esc_html( $bx_c['label'] ); ?></span></div>
+<?php endforeach; ?>
+</div>
+</div>
+<!-- END: Why Bixtron -->
 
-                <div class="channels__title">
-                    <h2>Specialty Markets</h2>
-                </div>
-
-                
-            </div>  -->
-<!-- END: Retail Markets -->
-<!-- START: Retail Brands -->
-<!-- <div id="specialty-brands" class="site-content__brands">
-
-                <h2 class="brands__title">Specialty Brands</h2>
-
-                
-            </div> -->
-<!-- END: Retail Brands -->
-<div class="site-content__brands" id="retail-brands">
-<h2 class="brands__title"><a aria-label="Open new tab to westchestergear.com" href="https://www.westchestergear.com/" style="text-decoration:none;" target="_blank">RETAIL BRANDS</a><br/><!-- KEY BRANDS FOR PROS & DIY -->
-<small><a aria-label="Open new tab to westchestergear.com" href="https://westchestergear.com/" style="text-decoration:none;" target="_blank">GO TO WEBSITE</a></small></h2>
-<div class="brands__brand-section">
-<a aria-label="Open new tab to http://bossgloves.com/" href="http://bossgloves.com/" target="_blank">
-<img alt="Boss" src="<?php echo pip_asset('images/brand-logos/boss.png'); ?>"/>
-</a>
+<!-- START: Offices -->
+<div class="bx-offices" id="offices">
+<?php foreach ( bx_offices() as $bx_o ) : ?>
+<div class="bx-offices__item">
+<h3><?php echo esc_html( $bx_o['name'] ); ?></h3>
+<p><?php echo implode( '<br/>', array_map( 'esc_html', $bx_o['address'] ) ); ?></p>
+<p><a href="tel:<?php echo esc_attr( $bx_o['phone_raw'] ); ?>"><?php echo esc_html( $bx_o['phone'] ); ?></a> &middot; <a href="mailto:<?php echo esc_attr( $bx_o['email'] ); ?>"><?php echo esc_html( $bx_o['email'] ); ?></a></p>
+<p><a class="bx-btn bx-btn--red" href="<?php echo esc_url( bx_whatsapp_url( 'Hello Bixtron', $bx_o['wa_raw'] ) ); ?>" rel="noopener" target="_blank">WhatsApp <?php echo esc_html( $bx_o['city'] ); ?></a></p>
 </div>
-<div class="brands__brand-section">
-<a aria-label="Open new tab to https://www.westchestergear.com/brands/prosafety" href="https://www.westchestergear.com/brands/prosafety" target="_blank">
-<img alt="pip-pro-safety" src="<?php echo pip_asset('images/brand-logos/pip-pro-safety.png'); ?>"/>
-</a>
+<?php endforeach; ?>
 </div>
-<div class="brands__brand-section">
-<a aria-label="Open new tab to https://www.pipglobal.com/" href="<?php echo esc_url( home_url( '/' ) ); ?>" target="_blank">
-<img alt="North" src="<?php echo pip_asset('images/brand-logos/north.png'); ?>"/>
-</a>
-</div>
-<div class="brands__brand-section">
-<a aria-label="Open new tab to https://www.pipglobal.com/" href="<?php echo esc_url( home_url( '/' ) ); ?>" target="_blank">
-<img alt="Howard-Leight" src="<?php echo pip_asset('images/brand-logos/howard-leight.png'); ?>"/>
-</a>
-</div>
-<div class="brands__brand-section">
-<a aria-label="Open new tab to http://safetyworks.com/" href="http://safetyworks.com/" target="_blank">
-<img alt="SafetyWorks" src="<?php echo pip_asset('images/brand-logos/safetyworks.png'); ?>"/>
-</a>
-</div>
-<div class="brands__brand-section">
-<a aria-label="Open new tab to https://www.hearos.com" href="https://www.hearos.com" target="_blank">
-<img alt="Hearos" src="<?php echo pip_asset('images/brand-logos/hearos.png'); ?>"/>
-</a>
-</div>
-<div class="brands__brand-section">
-<a aria-label="Open new tab to https://www.mudglove.com/" href="https://www.mudglove.com/" target="_blank">
-<img alt="Mud" src="<?php echo pip_asset('images/brand-logos/mud.png'); ?>"/>
-</a>
-</div>
-<div class="brands__brand-section">
-<a aria-label="Open new tab to http://westcountygardener.com/" href="http://westcountygardener.com/" target="_blank">
-<img alt="West County Gardner" src="<?php echo pip_asset('images/brand-logos/west-county-gardner.png'); ?>"/>
-</a>
-</div>
-<div class="brands__brand-section">
-<a aria-label="Open new tab to http://www.westchestergear.com" href="http://www.westchestergear.com" target="_blank">
-<img alt="John Deere" src="<?php echo pip_asset('images/brand-logos/john-deere.png'); ?>"/>
-</a>
-</div>
-<div class="brands__brand-section">
-<a aria-label="Open new tab to http://www.catgloves.com/" href="http://www.catgloves.com/" target="_blank">
-<img alt="Cat" src="<?php echo pip_asset('images/brand-logos/cat.png'); ?>"/>
-</a>
-</div>
-<div class="brands__brand-section">
-<a aria-label="Open new tab to http://www.westchestergear.com" href="http://www.westchestergear.com" target="_blank">
-<img alt="Miracle-Gro" src="<?php echo pip_asset('images/brand-logos/miracle-gro.png'); ?>"/>
-</a>
-</div>
-<div class="brands__brand-section">
-<a aria-label="Open new tab to http://www.westchestergear.com" href="http://www.westchestergear.com" target="_blank">
-<img alt="Scotts" src="<?php echo pip_asset('images/brand-logos/scotts.png'); ?>"/>
-</a>
-</div>
-</div>
-<!-- START: Retail Markets -->
-<div class="site-content__channels" id="retail-channels">
-<div class="channels__title">
-<h2>Retail Safety Markets</h2>
-</div>
-<style>#channel-contractor-professional{ background-image: url('<?php echo pip_asset('images/video-tiles/contractor-professional-still.jpg'); ?>'); }#channel-contractor-professional:hover { background-image: url('<?php echo pip_asset('images/gifcompressor/contractor-professional.gif'); ?>'); }</style>
-<section class="animation-element slide-up video-wide" id="contractor-professional">
-<a href="javascript:void(0);" style="cursor: default;">
-<div class="full-wrap" id="channel-contractor-professional">
-<div class="title-wrap" style="pointer-events:none;">
-<h2>Contractor Professional</h2>
-</div>
-</div>
-</a>
-</section>
-<style>#channel-lawn-and-garden{ background-image: url('<?php echo pip_asset('images/video-tiles/lawn-and-garden-still.jpg'); ?>'); }#channel-lawn-and-garden:hover { background-image: url('<?php echo pip_asset('images/gifcompressor/lawn-and-garden.gif'); ?>'); }</style>
-<section class="animation-element slide-up video-wide" id="lawn-and-garden">
-<a href="javascript:void(0);" style="cursor: default;">
-<div class="full-wrap" id="channel-lawn-and-garden">
-<div class="title-wrap" style="pointer-events:none;">
-<h2>Lawn and Garden</h2>
-</div>
-</div>
-</a>
-</section>
-<style>#channel-automotive-aftermarket{ background-image: url('<?php echo pip_asset('images/video-tiles/automotive-aftermarket-still.jpg'); ?>'); }#channel-automotive-aftermarket:hover { background-image: url('<?php echo pip_asset('images/gifcompressor/automotive-aftermarket.gif'); ?>'); }</style>
-<section class="animation-element slide-up video-wide" id="automotive-aftermarket">
-<a href="javascript:void(0);" style="cursor: default;">
-<div class="full-wrap" id="channel-automotive-aftermarket">
-<div class="title-wrap" style="pointer-events:none;">
-<h2>Automotive Aftermarket</h2>
-</div>
-</div>
-</a>
-</section>
-<style>#channel-farm-and-ranch{ background-image: url('<?php echo pip_asset('images/video-tiles/farm-and-ranch-still.jpg'); ?>'); }#channel-farm-and-ranch:hover { background-image: url('<?php echo pip_asset('images/gifcompressor/farm-and-ranch.gif'); ?>'); }</style>
-<section class="animation-element slide-up video-wide" id="farm-and-ranch">
-<a href="javascript:void(0);" style="cursor: default;">
-<div class="full-wrap" id="channel-farm-and-ranch">
-<div class="title-wrap" style="pointer-events:none;">
-<h2>Farm and Ranch</h2>
-</div>
-</div>
-</a>
-</section>
-</div>
-<!-- END: Retail Markets -->
-<!-- START: Retail Brands -->
-<!-- END: Retail Brands -->
+<!-- END: Offices -->
 </div>

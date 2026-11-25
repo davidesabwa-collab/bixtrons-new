@@ -1,0 +1,20 @@
+/*
+ * Bixtron font aliases.
+ * The PIP layout was designed with Adobe Typekit fonts (Acumin Pro, PF Fuel Grime) that belong to
+ * another company's Adobe account. These aliases keep every existing CSS rule working while
+ * serving free, self-hosted lookalikes (Roboto / Roboto Condensed / Anton, all open licence).
+ */
+@font-face{font-family:"acumin-pro-condensed";font-weight:300;font-style:normal;font-display:swap;src:url("../fonts/roboto-condensed-300-latin.woff2") format("woff2")}
+@font-face{font-family:"acumin-pro-condensed";font-weight:400;font-style:normal;font-display:swap;src:url("../fonts/roboto-condensed-400-latin.woff2") format("woff2")}
+@font-face{font-family:"acumin-pro-condensed";font-weight:500;font-style:normal;font-display:swap;src:url("../fonts/roboto-condensed-700-latin.woff2") format("woff2")}
+@font-face{font-family:"acumin-pro-condensed";font-weight:600;font-style:normal;font-display:swap;src:url("../fonts/roboto-condensed-700-latin.woff2") format("woff2")}
+@font-face{font-family:"acumin-pro-condensed";font-weight:700;font-style:normal;font-display:swap;src:url("../fonts/roboto-condensed-700-latin.woff2") format("woff2")}
+@font-face{font-family:"acumin-pro-condensed";font-weight:900;font-style:normal;font-display:swap;src:url("../fonts/roboto-condensed-700-latin.woff2") format("woff2")}
+@font-face{font-family:"acumin-pro";font-weight:300;font-style:normal;font-display:swap;src:url("../fonts/roboto-300-latin.woff2") format("woff2")}
+@font-face{font-family:"acumin-pro";font-weight:400;font-style:normal;font-display:swap;src:url("../fonts/roboto-400-latin.woff2") format("woff2")}
+@font-face{font-family:"acumin-pro";font-weight:500;font-style:normal;font-display:swap;src:url("../fonts/roboto-500-latin.woff2") format("woff2")}
+@font-face{font-family:"acumin-pro";font-weight:700;font-style:normal;font-display:swap;src:url("../fonts/roboto-700-latin.woff2") format("woff2")}
+@font-face{font-family:"acumin-pro-wide";font-weight:400;font-style:normal;font-display:swap;src:url("../fonts/roboto-400-latin.woff2") format("woff2")}
+@font-face{font-family:"acumin-pro-wide";font-weight:500;font-style:normal;font-display:swap;src:url("../fonts/roboto-500-latin.woff2") format("woff2")}
+@font-face{font-family:"acumin-pro-wide";font-weight:700;font-style:normal;font-display:swap;src:url("../fonts/roboto-700-latin.woff2") format("woff2")}
+@font-face{font-family:"PF-Fuel-Grime";font-weight:400;font-style:normal;font-display:swap;src:url("../fonts/anton-latin.woff2") format("woff2")}

@@ -30,3 +30,10 @@ desktop.ini
 .env.*.local
 
 __pycache__/
+
+# Local tooling output
+.impeccable/
+.playwright-mcp/
+/shot-*.png
+/base-*.png
+/_*.png

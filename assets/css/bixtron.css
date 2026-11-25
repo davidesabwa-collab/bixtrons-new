@@ -1,0 +1,291 @@
+/*
+ * Bixtron additions on top of the PIP layout.
+ * Palette comes from the Bixtron logo: blue #1973ac (primary), green #2bac4d, red #ed1e24, grey #5f6060.
+ * PIP's own red (#cd1b00) was replaced by the primary blue in the PIP stylesheets.
+ */
+:root{--bx-primary:#1973ac;--bx-primary-dark:#135a88;--bx-green:#2bac4d;--bx-green-dark:#1f8a3b;--bx-red:#ed1e24;--bx-gray-logo:#5f6060;--bx-ink:#111;--bx-gray:#6b7280;--bx-line:#e5e7eb;--bx-soft:#f3f4f6}
+
+/* ---------- Hero ---------- */
+
+/* ---------- Brand wall ---------- */
+.bx-brands{gap:1.5rem 1.5rem;align-items:stretch}
+.bx-brands .brands__brand-section{background:#fff;flex:0 1 calc(20% - 1.5rem);min-width:170px;display:flex;align-items:center;justify-content:center;padding:1.25rem 1.5rem;min-height:120px;box-shadow:0 2px 10px rgba(0,0,0,.12)}
+.bx-brands .brands__brand-section a{display:flex;align-items:center;justify-content:center;width:100%;height:100%}
+.bx-brands .brands__brand-section img{filter:none!important;opacity:1!important;max-width:100%!important;max-height:80px;width:auto;height:auto;object-fit:contain}
+
+/* ---------- Category tiles ---------- */
+.bx-tile .title-wrap{text-align:center;width:100%}
+.bx-tile__count{color:#fff;font-family:"acumin-pro-condensed",Arial,sans-serif;font-size:.95rem;letter-spacing:.08rem;margin:.5rem 0 0;text-transform:uppercase;opacity:.9}
+.bx-tile .full-wrap{background-color:#222;background-size:cover;background-position:center}
+
+/* ---------- Generic sections ---------- */
+.bx-section{max-width:1320px;margin:0 auto;padding:4.5rem 5%}
+.bx-section__head{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;margin-bottom:2rem;border-bottom:3px solid var(--bx-primary);padding-bottom:.75rem}
+.bx-section__head h2{font-family:"acumin-pro-condensed",Arial,sans-serif;font-weight:700;font-size:2.4rem;text-transform:uppercase;letter-spacing:.04em;margin:0;color:var(--bx-ink)}
+.bx-link{font-family:"acumin-pro-condensed",Arial,sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--bx-primary);text-decoration:none}
+.bx-link:hover{color:var(--bx-primary-dark)}
+.bx-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(235px,1fr));gap:1.5rem}
+.bx-card{background:#fff;border:1px solid var(--bx-line);display:flex;flex-direction:column;transition:box-shadow .2s ease,transform .2s ease}
+.bx-card:hover{box-shadow:0 10px 26px rgba(0,0,0,.12);transform:translateY(-3px)}
+.bx-card__img{display:block;aspect-ratio:1/1;background:#fff;padding:1rem}
+.bx-card__img img{width:100%;height:100%;object-fit:contain;display:block}
+.bx-card__title{font-family:"acumin-pro-condensed",Arial,sans-serif;font-size:1.1rem;font-weight:700;line-height:1.25;margin:0;padding:0 1rem;flex:1;text-transform:uppercase}
+.bx-card__title a{color:var(--bx-ink);text-decoration:none}
+.bx-card__actions{display:flex;gap:.5rem;padding:1rem}
+.bx-btn{display:inline-block;font-family:"acumin-pro-condensed",Arial,sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.08em;font-size:.95rem;line-height:1;padding:.85rem 1.3rem;text-align:center;text-decoration:none;border:2px solid var(--bx-primary);transition:all .15s ease;cursor:pointer}
+.bx-btn--red{background:var(--bx-primary);color:#fff!important}
+.bx-btn--red:hover{background:var(--bx-primary-dark);border-color:var(--bx-primary-dark)}
+.bx-btn--ghost{background:transparent;color:var(--bx-primary)!important}
+.bx-btn--ghost:hover{background:var(--bx-primary);color:#fff!important}
+.bx-btn--block{display:block;width:100%;margin-top:.5rem}
+.bx-card__actions .bx-btn{flex:1;padding:.75rem .5rem}
+
+/* ---------- What we do (inside PIP red .testimonial) ---------- */
+.bx-services .container{max-width:1320px;margin:0 auto;padding:0 5%}
+.bx-services__grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;margin-top:2.5rem}
+.bx-services__item{border-top:3px solid #fff;padding-top:1rem}
+.bx-services__item h4{font-family:"acumin-pro-condensed",Arial,sans-serif;font-size:1.5rem;text-transform:uppercase;margin:0 0 .75rem;color:#fff}
+.bx-services__item p{font-size:1.05rem;line-height:1.5;margin:0;color:#fff}
+
+/* ---------- Why Bixtron + certs ---------- */
+.bx-why__grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2rem}
+.bx-why__item h3{font-family:"acumin-pro-condensed",Arial,sans-serif;font-size:1.4rem;text-transform:uppercase;margin:0 0 .5rem;color:var(--bx-primary)}
+.bx-why__item p{margin:0;line-height:1.55;color:#374151}
+.bx-certs{display:flex;flex-wrap:wrap;gap:1.25rem;margin-top:3rem}
+.bx-certs__item{flex:1 1 260px;border:2px solid var(--bx-ink);padding:1.1rem 1.4rem;display:flex;flex-direction:column;gap:.25rem}
+.bx-certs__item strong{font-family:"acumin-pro-condensed",Arial,sans-serif;font-size:1.6rem;text-transform:uppercase;color:var(--bx-ink)}
+.bx-certs__item span{color:var(--bx-gray);font-size:.95rem}
+
+/* ---------- Offices band ---------- */
+.bx-offices{background:var(--bx-ink);color:#fff;display:flex;flex-wrap:wrap;justify-content:center;gap:3rem 6rem;padding:4rem 5%}
+.bx-offices__item{flex:0 1 420px}
+.bx-offices__item h3{font-family:"acumin-pro-condensed",Arial,sans-serif;font-size:1.8rem;text-transform:uppercase;margin:0 0 1rem;color:#fff;border-left:5px solid var(--bx-primary);padding-left:.75rem}
+.bx-offices__item p{margin:0 0 .8rem;line-height:1.55;color:#e5e7eb}
+.bx-offices__item a:not(.bx-btn){color:#fff}
+
+/* ---------- Inner page hero ---------- */
+.bx-hero{background:linear-gradient(115deg,#0b0b0b 0%,#1b1b1b 62%,var(--bx-primary) 62.1%,var(--bx-primary) 100%);color:#fff;padding:5.5rem 5% 4rem}
+.bx-hero__inner{max-width:1320px;margin:0 auto}
+.bx-hero__kicker{font-family:"acumin-pro-condensed",Arial,sans-serif;text-transform:uppercase;letter-spacing:.2em;color:#8fcbf0;margin:0 0 .5rem;font-weight:700}
+.bx-hero h1{font-family:"PF-Fuel-Grime","acumin-pro-condensed",Arial,sans-serif;font-weight:400;font-size:clamp(2.6rem,6vw,5rem);line-height:.95;text-transform:uppercase;margin:0;color:#fff}
+.bx-hero__lead{max-width:760px;font-size:1.2rem;line-height:1.55;margin:1.25rem 0 0;color:#e5e7eb}
+.bx-page{max-width:1320px;margin:0 auto;padding:3.5rem 5%}
+.bx-page h2{font-family:"acumin-pro-condensed",Arial,sans-serif;text-transform:uppercase;font-weight:700;font-size:2rem;margin:0 0 1rem;color:var(--bx-ink)}
+.bx-page p{line-height:1.7;color:#374151;max-width:900px}
+.bx-two{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start}
+.bx-panel{border-left:5px solid var(--bx-primary);background:var(--bx-soft);padding:1.5rem 1.75rem;margin-bottom:1.5rem}
+.bx-panel h3{font-family:"acumin-pro-condensed",Arial,sans-serif;font-size:1.5rem;text-transform:uppercase;margin:0 0 .6rem}
+.bx-panel p{margin:0 0 .5rem}
+.bx-list{list-style:none;padding:0;margin:0}
+.bx-list li{padding:.7rem 0 .7rem 1.6rem;border-bottom:1px solid var(--bx-line);position:relative;line-height:1.5}
+.bx-list li:before{content:"";position:absolute;left:0;top:1.15rem;width:.7rem;height:.7rem;background:var(--bx-primary);transform:skewX(-20deg)}
+.bx-cta-row{display:flex;gap:1rem;flex-wrap:wrap;margin-top:1.5rem}
+
+/* ---------- Shop / WooCommerce (inside PIP header+footer) ---------- */
+.bx-shop-wrap{max-width:1320px;margin:0 auto;padding:3rem 5% 5rem;font-family:"acumin-pro",Roboto,Arial,sans-serif}
+.bx-shop-wrap .woocommerce-products-header__title,.bx-shop-wrap .product_title{font-family:"acumin-pro-condensed",Arial,sans-serif;text-transform:uppercase;font-weight:700;letter-spacing:.03em;color:var(--bx-ink)}
+.bx-shop-wrap ul.products{display:grid!important;grid-template-columns:repeat(4,1fr);gap:1.5rem;margin:0 0 2rem!important;padding:0;list-style:none}
+.bx-shop-wrap ul.products::before,.bx-shop-wrap ul.products::after{display:none!important}
+.bx-shop-wrap ul.products li.product{width:auto!important;float:none!important;margin:0!important;border:1px solid var(--bx-line);padding:1rem;background:#fff;display:flex;flex-direction:column;transition:box-shadow .2s ease}
+.bx-shop-wrap ul.products li.product:hover{box-shadow:0 10px 26px rgba(0,0,0,.12)}
+.bx-shop-wrap ul.products li.product a img{aspect-ratio:1/1;object-fit:contain;width:100%;height:auto;margin:0 0 .75rem}
+.bx-shop-wrap ul.products li.product .woocommerce-loop-product__title{font-family:"acumin-pro-condensed",Arial,sans-serif;font-size:1.05rem;font-weight:700;text-transform:uppercase;line-height:1.25;padding:0;color:var(--bx-ink);flex:1}
+.bx-shop-wrap .price,.bx-price-quote{color:var(--bx-gray);font-size:.95rem;margin:.5rem 0}
+.bx-shop-wrap a.button,.bx-shop-wrap button.button,.bx-shop-wrap .button.alt,.bx-shop-wrap input.button,.woocommerce a.button.alt,.woocommerce button.button.alt,.woocommerce #respond input#submit{background:var(--bx-primary)!important;color:#fff!important;font-family:"acumin-pro-condensed",Arial,sans-serif;text-transform:uppercase;letter-spacing:.08em;font-weight:700;border-radius:0!important;padding:.8rem 1.2rem}
+.bx-shop-wrap a.button:hover,.bx-shop-wrap button.button:hover{background:var(--bx-primary-dark)!important}
+.bx-shop-wrap .woocommerce-result-count,.bx-shop-wrap .woocommerce-ordering{margin-bottom:1.25rem}
+.bx-shop-wrap .woocommerce-ordering select{padding:.55rem;border:1px solid var(--bx-line)}
+.bx-shop-wrap nav.woocommerce-pagination ul{border:0}
+.bx-shop-wrap nav.woocommerce-pagination ul li span.current{background:var(--bx-primary);color:#fff}
+.bx-shop-wrap div.product{display:block}
+.bx-shop-wrap div.product div.images{width:46%}
+.bx-shop-wrap div.product div.summary{width:48%}
+.bx-shop-wrap div.product .woocommerce-tabs{clear:both;padding-top:2rem}
+.bx-shop-wrap div.product .woocommerce-tabs ul.tabs li.active{border-bottom-color:var(--bx-primary)}
+.bx-order-actions{display:flex;gap:.75rem;flex-wrap:wrap;margin:1.25rem 0}
+.bx-shop-wrap .product_meta{font-size:.9rem;color:var(--bx-gray)}
+.bx-page .woocommerce{max-width:100%}
+
+/* ---------- Category landing ---------- */
+.bx-subcats{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1rem;margin:0 0 3rem}
+.bx-subcats a{display:flex;justify-content:space-between;align-items:center;border:1px solid var(--bx-line);border-left:5px solid var(--bx-primary);padding:1rem 1.2rem;text-decoration:none;color:var(--bx-ink);font-family:"acumin-pro-condensed",Arial,sans-serif;font-weight:700;text-transform:uppercase;transition:background .15s ease}
+.bx-subcats a:hover{background:var(--bx-soft)}
+.bx-subcats span{color:var(--bx-gray);font-weight:400;font-size:.9rem}
+
+/* ---------- Footer additions ---------- */
+footer .bx-copy{font-size:.8rem;opacity:.7;margin-top:1rem}
+footer #footer-contact a,footer #hq a{word-break:break-word}
+
+/* ---------- Responsive ---------- */
+@media screen and (max-width:1100px){
+  .bx-services__grid,.bx-why__grid{grid-template-columns:repeat(2,1fr)}
+  .bx-shop-wrap ul.products{grid-template-columns:repeat(3,1fr)}
+}
+@media screen and (max-width:760px){
+  .bx-two{grid-template-columns:1fr}
+  .bx-services__grid,.bx-why__grid{grid-template-columns:1fr}
+  .bx-shop-wrap ul.products{grid-template-columns:repeat(2,1fr)}
+  .bx-shop-wrap div.product div.images,.bx-shop-wrap div.product div.summary{width:100%;float:none}
+  .bx-section__head h2{font-size:1.8rem}
+  .bx-hero{background:linear-gradient(115deg,#0b0b0b 0%,#1b1b1b 80%,var(--bx-primary) 80.1%)}
+}
+@media screen and (max-width:480px){.bx-shop-wrap ul.products{grid-template-columns:1fr}}
+
+/* ---------- Category landing banner (PIP channel-style lead-in with an image instead of video) ---------- */
+.bx-lead{position:relative;background-color:#111;background-size:cover;background-position:center;min-height:380px;display:flex;align-items:center;overflow:hidden}
+.bx-lead__overlay{position:absolute;inset:0;background:linear-gradient(100deg,rgba(0,0,0,.92) 0%,rgba(0,0,0,.78) 55%,rgba(25,115,172,.75) 100%)}
+.bx-lead__text{position:relative;z-index:2;max-width:1320px;margin:0 auto;padding:4.5rem 5%;width:100%;color:#fff;text-align:left}
+.bx-lead__text h1{font-family:"PF-Fuel-Grime","acumin-pro-condensed",Arial,sans-serif;font-weight:400;font-size:clamp(2.8rem,6.5vw,5.5rem);line-height:.95;text-transform:uppercase;color:#fff;margin:0}
+.bx-lead__text h1 span{color:#8fcbf0}
+.bx-lead__desc{font-family:"acumin-pro-condensed",Arial,sans-serif;font-size:1.3rem;line-height:1.5;max-width:760px;margin:1.25rem 0;color:#e5e7eb}
+.bx-btn--onDark{color:#fff!important;border-color:#fff}
+.bx-btn--onDark:hover{background:#fff;color:var(--bx-primary)!important}
+
+/* ---------- Maps, forms, generic content pages ---------- */
+.bx-map{width:100%;height:320px;border:0;margin-bottom:2rem;background:var(--bx-soft)}
+.bx-form input[type=text],.bx-form input[type=email],.bx-form input[type=tel],.bx-form textarea{width:100%;padding:.8rem 1rem;border:1px solid #cfd4da;font:inherit;margin:.25rem 0 1rem;border-radius:0}
+.bx-form input[type=submit]{background:var(--bx-primary);color:#fff;border:0;padding:.9rem 2rem;font-family:"acumin-pro-condensed",Arial,sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.08em;cursor:pointer}
+.bx-form input[type=submit]:hover{background:var(--bx-primary-dark)}
+.bx-page--content .entry-content{max-width:1100px;line-height:1.7;color:#374151}
+.bx-page--content .entry-content h2,.bx-page--content .entry-content h3{font-family:"acumin-pro-condensed",Arial,sans-serif;text-transform:uppercase;color:var(--bx-ink)}
+.bx-page--content .woocommerce table.shop_table{border-radius:0}
+
+/* "Shop all" tile that completes the category grid */
+.bx-tile--all .full-wrap{background:var(--bx-primary)}
+.bx-tile--all .full-wrap:before{display:none}
+
+/* Red band: set explicitly so no other .testimonial rule can wash it out */
+.testimonial.bx-services{background:var(--bx-primary);color:#fff;padding:5rem 0}
+.testimonial.bx-services h3{color:#fff}
+.bx-shop-wrap h1.page-title{display:none}
+.bx-shop-wrap .woocommerce-ordering select{max-width:100%}
+
+/* YITH Request a Quote button in PIP colours */
+.bx-shop-wrap .yith-ywraq-add-button a.add-request-quote-button,.bx-shop-wrap .yith-ywraq-add-to-quote a.button{background:transparent!important;color:var(--bx-primary)!important;border:2px solid var(--bx-primary)!important;border-radius:0!important;font-family:"acumin-pro-condensed",Arial,sans-serif;text-transform:uppercase;letter-spacing:.08em;font-weight:700}
+.bx-shop-wrap .yith-ywraq-add-button a.add-request-quote-button:hover{background:var(--bx-primary)!important;color:#fff!important}
+
+/* Mobile hero: Anton is wider than PIP's original face, so scale the headline to the screen */
+@media screen and (max-width:900px){
+  .site-content__hero #WWPIE-Header .hero-text-container h1{font-size:clamp(2.6rem,14vw,5.5rem)!important;line-height:.95}
+  .site-content__hero #WWPIE-Header .hero-text-container h2{font-size:clamp(1.1rem,5vw,1.8rem)!important}
+}
+
+/* ---------- Bixtron palette accents (green + red come from the logo) ---------- */
+.bx-btn[href*="wa.me"]{background:var(--bx-green);border-color:var(--bx-green);color:#fff!important}
+.bx-btn[href*="wa.me"]:hover{background:var(--bx-green-dark);border-color:var(--bx-green-dark)}
+.bx-btn--ghost[href*="wa.me"]{background:transparent;color:var(--bx-green-dark)!important}
+.bx-btn--ghost[href*="wa.me"]:hover{background:var(--bx-green);color:#fff!important}
+.bx-list li:before{background:var(--bx-green)}
+.bx-certs__item{border:0;border-top:4px solid var(--bx-green);box-shadow:0 2px 12px rgba(0,0,0,.08)}
+.bx-certs__item strong{color:var(--bx-primary)}
+.bx-panel{border-left-color:var(--bx-green)}
+.bx-offices__item h3{border-left-color:var(--bx-green)}
+.bx-section__head{border-bottom-color:var(--bx-primary)}
+.bx-why__item h3{color:var(--bx-primary)}
+.bx-services__item{border-top-color:#fff}
+.site-content__hero #WWPIE-Header .hero-text-container h1 span{color:var(--bx-red)}
+.bx-price-quote{color:var(--bx-gray-logo)}
+
+/* Legibility: slightly stronger overlay + shadow on category tiles; calmer red-band spacing */
+.bx-tile .full-wrap:before{background:#0b1620;opacity:.6}
+.bx-tile .full-wrap:hover:before{opacity:0}
+.bx-tile .title-wrap h2,.bx-tile__count{text-shadow:0 1px 6px rgba(0,0,0,.65)}
+.testimonial.bx-services{padding:4rem 0}
+
+/* Equal-height product cards with buttons pinned to the bottom */
+.bx-shop-wrap ul.products li.product a.woocommerce-LoopProduct-link{display:flex;flex-direction:column;flex:1}
+.bx-shop-wrap ul.products li.product .woocommerce-loop-product__title{flex:1 1 auto;margin:0 0 .25rem}
+.bx-shop-wrap ul.products li.product .price{margin-top:.25rem}
+.bx-shop-wrap ul.products li.product a.button{margin-top:.75rem;align-self:flex-start}
+
+/* Scroll-to-top arrow (inline SVG, no icon font) */
+.scrollToTop{display:flex;align-items:center;justify-content:center}
+.scrollToTop .bx-up{display:block}
+
+
+/* ---------- Hero without the emblem: text block starts at the left, over the wedge ---------- */
+.site-content__hero #WWPIE-Header .hero-text-container{width:100%;max-width:100%;padding:0 6vw}
+@media screen and (max-width:900px){.site-content__hero #WWPIE-Header .hero-text-container{padding:0 5vw}}
+
+/* ---------- Product descriptions (formatted from the catalogue text) ---------- */
+.bx-desc{font-family:"acumin-pro",Roboto,Arial,sans-serif;color:#374151;line-height:1.65}
+.bx-desc p{margin:0 0 1rem;max-width:72ch}
+.bx-desc__lead{font-size:1.125rem;color:var(--bx-ink)}
+.bx-desc__h{font-family:"acumin-pro-condensed",Arial,sans-serif;font-size:1.25rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--bx-primary);margin:1.75rem 0 .6rem;padding-bottom:.4rem;border-bottom:2px solid var(--bx-line)}
+.bx-desc__list{list-style:none;margin:0 0 1rem;padding:0;columns:2;column-gap:2.5rem}
+.bx-desc__list li{position:relative;padding:.35rem 0 .35rem 1.5rem;break-inside:avoid;line-height:1.45}
+.bx-desc__list li:before{content:"";position:absolute;left:0;top:.8rem;width:.55rem;height:.55rem;background:var(--bx-green);transform:skewX(-20deg)}
+.bx-desc__spec{display:flex;gap:1rem;padding:.55rem 0;border-bottom:1px solid var(--bx-line);max-width:72ch}
+.bx-desc__spec strong{flex:0 0 11rem;color:var(--bx-ink)}
+.bx-desc--summary .bx-desc__list{columns:1;margin-bottom:.5rem}
+.bx-desc--summary .bx-desc__lead{font-size:1.05rem}
+@media screen and (max-width:760px){
+  .bx-desc__list{columns:1}
+  .bx-desc__spec{flex-direction:column;gap:.15rem}
+  .bx-desc__spec strong{flex:none}
+}
+
+
+/* ---------- Layout fixes ---------- */
+/* PIP puts a 50px margin above #content, which leaves a white gap between the header and the hero */
+body.home #content,.pip-home #content{margin-top:0!important}
+/* PIP's mobile rule turns the page grey; the Bixtron pages are white */
+html,body{background:#fff!important}
+
+/* ---------- Mobile polish ---------- */
+@media screen and (max-width:760px){
+  .bx-shop-wrap{padding:1.5rem 5% 3rem;font-size:16px}
+  .bx-shop-wrap .product_title{font-size:1.6rem;line-height:1.2}
+  .bx-shop-wrap div.product div.images,.bx-shop-wrap div.product div.summary{width:100%!important;float:none!important}
+  .bx-shop-wrap .woocommerce-tabs ul.tabs{padding-left:0}
+  .bx-order-actions .bx-btn,.bx-card__actions .bx-btn{flex:1 1 100%}
+  .bx-hero{padding:3rem 5% 2.25rem}
+  .bx-hero h1{font-size:clamp(2.2rem,11vw,3.2rem)}
+  .bx-page{padding:2.25rem 5%}
+  .bx-page h2{font-size:1.5rem}
+  .bx-section{padding:3rem 5%}
+  .bx-section__head{flex-direction:column;align-items:flex-start}
+  .bx-offices{padding:2.5rem 5%;gap:2rem}
+  .bx-lead__text{padding:3rem 5%}
+  .bx-subcats{grid-template-columns:1fr 1fr}
+  .bx-map{height:240px}
+  .bx-certs__item{flex:1 1 100%}
+}
+@media screen and (max-width:420px){
+  .bx-subcats{grid-template-columns:1fr}
+}
+
+
+/* ---------- Phone/tablet menu: dropdowns become a full-width panel under the nav row ---------- */
+@media screen and (max-width:65rem){
+  .site-header .site-nav__nav-center{position:relative!important}
+  .site-header .site-nav__nav-center > li.parent-link{position:static!important}
+  .site-header .site-nav__nav-center > li > ul,
+  .site-header .site-nav__nav-center > li:hover > ul,
+  .site-header .site-nav__nav-center > li > ul.menu-open{
+    position:absolute!important;left:2%!important;right:2%!important;width:96%!important;top:100%!important;
+    transform:none!important;max-height:calc(100vh - 170px);overflow-y:auto;
+    box-shadow:0 12px 30px rgba(0,0,0,.35)!important;
+  }
+  .site-header .site-nav__nav-center > li > ul > li > a{padding:.9rem 1.1rem!important;font-size:1rem!important}
+}
+
+
+/* ---------- Mobile header height + hero tagline ---------- */
+@media screen and (max-width:65rem){
+  /* offset equals the header height, so no white strip shows between header and page */
+  body{padding-top:98px!important}
+  .site-header .site-nav__nav-center > li.parent-link > span{white-space:nowrap}
+}
+@media screen and (max-width:400px){
+  .site-header .site-nav__nav-center > li.parent-link > span{font-size:12px!important;letter-spacing:0!important;padding-left:.1rem!important;padding-right:.1rem!important}
+}
+@media screen and (max-width:900px){
+  .site-content__hero #WWPIE-Header .hero-text-container h2{line-height:1.12!important;margin-top:.6rem!important}
+  .site-content__hero #WWPIE-Header .hero-text-container h2 .hero-subtext__phrase{display:inline-block;margin:0 .15em}
+}
+
+@media screen and (max-width:360px){
+  .site-header .site-nav__nav-center > li.parent-link > span{font-size:11px!important;white-space:nowrap!important}
+  .site-header .site-nav__nav-center{gap:0!important;justify-content:space-between!important;padding:0 2px!important}
+}
