@@ -7,7 +7,7 @@
 get_header();
 
 $bx_term  = get_queried_object();
-$bx_img   = bx_category_image( $bx_term, 'full' );
+$bx_img   = bx_category_image( $bx_term, 'large' );
 $bx_kids  = get_terms( array(
     'taxonomy'   => 'product_cat',
     'parent'     => $bx_term->term_id,

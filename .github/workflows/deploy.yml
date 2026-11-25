@@ -26,12 +26,23 @@ jobs:
           fi
           echo "All PHP files passed lint."
 
+      - name: Stamp build id (asset cache-busting + page cache key)
+        run: |
+          BUILD="${GITHUB_SHA::10}"
+          printf "<?php\n/** Build identifier: set by the deploy workflow (git commit SHA). */\nif ( ! defined( 'BX_BUILD' ) ) {\n    define( 'BX_BUILD', '%s' );\n}\n" "$BUILD" > inc/build.php
+          echo "Build id: $BUILD"
+
       - name: Package Theme Code
         run: |
           echo "Packaging theme code (templates, stylesheets, scripts, fonts)..."
           zip -r -q theme.zip . \
             -x ".git/*" \
             -x ".github/*" \
+            -x "tools/*" \
+            -x "dropins/*" \
+            -x "README.md" \
+            -x "agent_deployment_instructions.md" \
+            -x "wp-config-sample-live.php" \
             -x "*.sql*" \
             -x "*.py" \
             -x "*.zip" \
@@ -63,11 +74,31 @@ jobs:
 
       - name: Live Smoke Test
         run: |
-          echo "Verifying live site status..."
-          STATUS=$(curl -s -o /dev/null -w "%{http_code}" "https://new.bixtrons.com/")
-          echo "Live HTTP Status: $STATUS"
-          if [ "$STATUS" -ne 200 ]; then
-            echo "Deployment verification failed with status $STATUS"
+          BASE=https://new.bixtrons.com
+          FAIL=0
+          for p in / /shop/ /about/ /contact/ /our-locations/; do
+            S=$(curl -s -o /dev/null -w "%{http_code}" --max-time 90 "$BASE$p")
+            echo "$p -> $S"
+            [ "$S" = "200" ] || FAIL=1
+          done
+          curl -s --max-time 90 "$BASE/" | grep -q 'id="bx-fab"' || { echo "Chat widget missing on home page"; FAIL=1; }
+          curl -s --max-time 90 "$BASE/contact/" | grep -q 'id="bx-chat-inline"' || { echo "Chat missing on contact page"; FAIL=1; }
+          if [ "$FAIL" -ne 0 ]; then
+            echo "Deployment verification failed"
             exit 1
           fi
-          echo "Deployment verified successfully! Live at https://new.bixtrons.com/"
+          echo "Deployment verified successfully! Live at $BASE/"
+
+      - name: Warm page cache (key pages, categories, products)
+        continue-on-error: true
+        run: |
+          BASE=https://new.bixtrons.com
+          {
+            for p in / /about/ /contact/ /our-locations/ /quality-certifications/ /legal/ /shop/; do echo "$BASE$p"; done
+            curl -s --max-time 90 "$BASE/wp-json/wc/store/v1/products/categories?per_page=100" | grep -o '"permalink":"[^"]*"' | sed 's/"permalink":"//; s/"$//; s#\\/#/#g'
+            for pg in 1 2 3; do
+              curl -s --max-time 90 "$BASE/wp-json/wc/store/v1/products?per_page=100&page=$pg" | grep -o '"permalink":"[^"]*"' | sed 's/"permalink":"//; s/"$//; s#\\/#/#g'
+            done
+          } | sort -u > urls.txt
+          echo "Warming $(wc -l < urls.txt) URLs..."
+          timeout 600 xargs -P 6 -n 1 curl -s -o /dev/null --max-time 120 -w "%{http_code} %{time_total}s %{url_effective}\n" < urls.txt | sort | uniq -c -w4 | head -5

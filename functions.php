@@ -9,9 +9,17 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-define( 'PIP_THEME_VERSION', '2.0.0' );
+define( 'PIP_THEME_VERSION', '2.1.0' );
 define( 'PIP_THEME_DIR', get_stylesheet_directory() );
 define( 'PIP_THEME_URI', get_stylesheet_directory_uri() );
+
+// Build id (git SHA on deploy): version string for assets and the page cache.
+if ( file_exists( PIP_THEME_DIR . '/inc/build.php' ) ) {
+    require_once PIP_THEME_DIR . '/inc/build.php';
+}
+if ( ! defined( 'BX_BUILD' ) ) {
+    define( 'BX_BUILD', PIP_THEME_VERSION );
+}
 
 /**
  * Bixtron company data + helpers (logo, offices, brands, categories).
@@ -20,6 +28,9 @@ require_once PIP_THEME_DIR . '/inc/bixtron-data.php';
 require_once PIP_THEME_DIR . '/inc/bixtron-pages.php';
 require_once PIP_THEME_DIR . '/inc/bixtron-woocommerce.php';
 require_once PIP_THEME_DIR . '/inc/bixtron-descriptions.php';
+require_once PIP_THEME_DIR . '/inc/bixtron-performance.php';
+require_once PIP_THEME_DIR . '/inc/bixtron-cache.php';
+require_once PIP_THEME_DIR . '/inc/bixtron-chat.php';
 
 /**
  * Helper function to retrieve theme assets
@@ -29,42 +40,23 @@ function pip_asset( $path = '' ) {
 }
 
 /**
- * Enqueue scripts and styles
+ * Enqueue scripts and styles.
+ *
+ * Four small stylesheets instead of twenty: fonts, the PIP layout trimmed to the rules the Bixtron
+ * pages use (pip-lite.min.css, built by tools/build-css.js), the theme stylesheet and the Bixtron additions.
  */
 function pip_theme_enqueue_assets() {
-    // 1. Parent theme style
-    wp_enqueue_style( 'hello-elementor-parent-style', get_template_directory_uri() . '/style.css' );
+    $v = BX_BUILD;
 
-    // 3. Local Theme Stylesheets
-    wp_enqueue_style( 'pip-bootstrap', pip_asset( 'css/bootstrap.css' ), array(), PIP_THEME_VERSION );
-    wp_enqueue_style( 'pip-owl-carousel', pip_asset( 'css/owl.carousel.css' ), array(), PIP_THEME_VERSION );
-    wp_enqueue_style( 'pip-twentytwenty', pip_asset( 'css/twentytwenty.css' ), array(), PIP_THEME_VERSION );
-    wp_enqueue_style( 'pip-fonts-roboto', pip_asset( 'css/fonts-roboto.css' ), array(), PIP_THEME_VERSION );
-    wp_enqueue_style( 'bx-fonts', pip_asset( 'css/bixtron-fonts.css' ), array(), PIP_THEME_VERSION );
-    wp_enqueue_style( 'pip-fonts-custom', pip_asset( 'css/fonts.css' ), array(), PIP_THEME_VERSION );
-    wp_enqueue_style( 'pip-font-class-style', pip_asset( 'css/font-class-style.css' ), array(), PIP_THEME_VERSION );
-    wp_enqueue_style( 'pip-channel', pip_asset( 'css/channel.min.css' ), array(), PIP_THEME_VERSION );
-    wp_enqueue_style( 'pip-main-css', pip_asset( 'css/pip-main.css' ), array(), PIP_THEME_VERSION );
-    wp_enqueue_style( 'pip-style-min', pip_asset( 'css/style.min.css' ), array(), PIP_THEME_VERSION );
-    wp_enqueue_style( 'hello-elementor-pip-style', get_stylesheet_uri(), array( 'hello-elementor-parent-style' ), PIP_THEME_VERSION );
-    wp_enqueue_style( 'bixtron-css', pip_asset( 'css/bixtron.css' ), array( 'hello-elementor-pip-style' ), PIP_THEME_VERSION );
+    wp_enqueue_style( 'bx-fonts', pip_asset( 'css/bx-fonts.css' ), array(), $v );
 
-    // 4. JavaScript Libraries
+    wp_enqueue_style( 'bx-pip', pip_asset( 'css/pip-lite.min.css' ), array( 'bx-fonts' ), $v );
+    wp_enqueue_style( 'hello-elementor-pip-style', get_stylesheet_uri(), array( 'bx-pip' ), $v );
+    wp_enqueue_style( 'bixtron-css', pip_asset( 'css/bixtron.css' ), array( 'hello-elementor-pip-style' ), $v );
+
+    // Dropdowns, scroll-to-top and scroll animations. Deferred: nothing needs it before first paint.
     wp_enqueue_script( 'jquery' );
-    // menu.js and timeline.js are not loaded: menu.js duplicated (and cancelled) the dropdown handling in pip-theme.js and both crashed on the missing $ alias.
-    wp_enqueue_script( 'pip-owl', pip_asset( 'js/owl.carousel.min.js' ), array( 'jquery' ), PIP_THEME_VERSION, true );
-    wp_enqueue_script( 'pip-bxslider', pip_asset( 'js/jquery.bxslider.js' ), array( 'jquery' ), PIP_THEME_VERSION, true );
-    wp_enqueue_script( 'pip-event-move', pip_asset( 'js/jquery.event.move.js' ), array( 'jquery' ), PIP_THEME_VERSION, true );
-    wp_enqueue_script( 'pip-twentytwenty', pip_asset( 'js/jquery.twentytwenty.js' ), array( 'jquery' ), PIP_THEME_VERSION, true );
-    wp_enqueue_script( 'pip-chart', pip_asset( 'js/chart.js' ), array(), PIP_THEME_VERSION, true );
-
-    // Front-page script
-    if ( is_front_page() || is_home() ) {
-        wp_enqueue_script( 'pip-home', pip_asset( 'js/pip-home.js' ), array( 'jquery' ), PIP_THEME_VERSION, true );
-    }
-
-    // Main interactive theme initializer
-    wp_enqueue_script( 'pip-theme-init', pip_asset( 'js/pip-theme.js' ), array( 'jquery' ), PIP_THEME_VERSION, true );
+    wp_enqueue_script( 'pip-theme-init', pip_asset( 'js/pip-theme.js' ), array( 'jquery' ), $v, array( 'in_footer' => true, 'strategy' => 'defer' ) );
 }
 add_action( 'wp_enqueue_scripts', 'pip_theme_enqueue_assets', 20 );
 

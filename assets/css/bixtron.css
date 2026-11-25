@@ -289,3 +289,60 @@ html,body{background:#fff!important}
   .site-header .site-nav__nav-center > li.parent-link > span{font-size:11px!important;white-space:nowrap!important}
   .site-header .site-nav__nav-center{gap:0!important;justify-content:space-between!important;padding:0 2px!important}
 }
+
+
+/* ---------- Hero entrance animation in pure CSS (replaces the 72 KB GSAP script) ---------- */
+@keyframes bx-hero-reveal{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0 0 0)}}
+@keyframes bx-hero-rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.site-content__hero #WWPIE-Header .hero-text-container h1{animation:bx-hero-reveal .7s cubic-bezier(.2,.7,.2,1) both}
+.site-content__hero #WWPIE-Header .hero-text-container h2 .hero-subtext__phrase{animation:bx-hero-rise .5s ease both}
+.site-content__hero #WWPIE-Header .hero-text-container h2 .hero-subtext__phrase:nth-child(1){animation-delay:.35s}
+.site-content__hero #WWPIE-Header .hero-text-container h2 .hero-subtext__phrase:nth-child(2){animation-delay:.5s}
+.site-content__hero #WWPIE-Header .hero-text-container h2 .hero-subtext__phrase:nth-child(3){animation-delay:.65s}
+.site-content__hero .hero__nav-links{animation:bx-hero-rise .5s .8s ease both}
+@media (prefers-reduced-motion:reduce){
+  .site-content__hero #WWPIE-Header .hero-text-container h1,
+  .site-content__hero #WWPIE-Header .hero-text-container h2 .hero-subtext__phrase,
+  .site-content__hero .hero__nav-links{animation:none}
+}
+
+
+/* ---------- Floating chat button (panel styles load lazily from bixtron-chat.css) ---------- */
+.bx-fab{position:fixed;right:20px;bottom:20px;z-index:2147482990;display:flex;align-items:center;justify-content:center;width:58px;height:58px;padding:0;border:0;border-radius:50%;background:var(--bx-primary);color:#fff;cursor:pointer;box-shadow:0 6px 20px rgba(0,0,0,.28);transition:transform .15s ease,background .15s ease}
+.bx-fab:hover{background:var(--bx-primary-dark);transform:translateY(-2px)}
+.bx-fab:focus-visible{outline:3px solid #8fcbf0;outline-offset:3px}
+.bx-fab__icon--close{display:none}
+.bx-fab.is-open .bx-fab__icon--chat{display:none}
+.bx-fab.is-open .bx-fab__icon--close{display:block}
+.bx-fab__label{position:absolute;right:70px;top:50%;transform:translateY(-50%);white-space:nowrap;background:#111;color:#fff;font:500 14px/1 "acumin-pro-condensed",Arial,sans-serif;letter-spacing:.06em;text-transform:uppercase;padding:.7rem .9rem;border-radius:6px;opacity:0;pointer-events:none;transition:opacity .2s ease}
+.bx-fab:hover .bx-fab__label,.bx-fab:focus-visible .bx-fab__label{opacity:1}
+.bx-fab.is-open .bx-fab__label{display:none}
+@media (max-width:600px){.bx-fab__label{display:none}}
+@media (prefers-reduced-motion:no-preference){.bx-fab:not(.is-open){animation:bx-fab-ring 2.4s ease-out 2s 2}}
+@keyframes bx-fab-ring{0%{box-shadow:0 6px 20px rgba(0,0,0,.28),0 0 0 0 rgba(25,115,172,.55)}80%,100%{box-shadow:0 6px 20px rgba(0,0,0,.28),0 0 0 18px rgba(25,115,172,0)}}
+html.bx-chat-open,html.bx-chat-open body{overflow:hidden}
+@media (min-width:601px){html.bx-chat-open,html.bx-chat-open body{overflow:auto}}
+
+/* ---------- Contact page chat layout ---------- */
+.bx-two--chat{grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr)}
+.bx-chat-lead{margin:0 0 1.25rem;max-width:60ch}
+.bx-chat-inline{min-height:540px;max-width:680px}
+.bx-chat-skeleton{display:flex;flex-direction:column;gap:.9rem;height:540px;padding:0 0 1rem;border:1px solid #d9dfe7;border-radius:16px;overflow:hidden;box-shadow:0 10px 30px rgba(17,24,39,.08)}
+.bx-chat-skeleton__bar{display:block;height:64px;background:var(--bx-primary)}
+.bx-chat-skeleton__line{display:block;height:44px;width:70%;margin:0 1rem;border-radius:16px;background:#eef2f6}
+.bx-chat-skeleton__line--s{width:45%}
+@media (max-width:1000px){.bx-two--chat{grid-template-columns:1fr}}
+@media (max-width:600px){.bx-chat-inline,.bx-chat-skeleton{min-height:520px;height:auto}.bx-chat-skeleton{height:520px}}
+
+
+/* ---------- Floating button placement (chosen from a collision test: bottom-right beats bottom-left) ---------- */
+/* Stack: chat button at the corner, scroll-to-top centred directly above it, footer padded so neither covers text. */
+.scrollToTop{right:27px!important;bottom:104px!important;z-index:9980!important}
+footer{padding-bottom:96px!important}
+.bx-fab{transition:transform .2s ease,opacity .2s ease,background .15s ease}
+@media (max-width:600px){
+  .bx-fab{right:16px;bottom:16px;width:54px;height:54px}
+  .scrollToTop{right:21px!important;bottom:84px!important}
+  .bx-fab.is-away{transform:translateY(100px);opacity:0;pointer-events:none}
+}
+.bx-two--chat>div,.bx-chat-inline{min-width:0}

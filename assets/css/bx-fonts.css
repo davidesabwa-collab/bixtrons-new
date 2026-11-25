@@ -1,0 +1,31 @@
+/*
+ * Bixtron fonts: latin subsets only, self-hosted, font-display:swap.
+ * PIP's CSS asks for Adobe Typekit families (acumin-pro, acumin-pro-condensed, acumin-pro-wide, Industry,
+ * PF-Fuel-Grime) that belong to another company's Adobe account. They are aliased here to open-licence
+ * lookalikes (Roboto, Roboto Condensed, Anton) so every existing rule keeps working.
+ * Replaces fonts-roboto.css (36 faces), fonts.css, font-class-style.css and bixtron-fonts.css.
+ */
+@font-face{font-family:"Roboto";font-style:normal;font-weight:300;font-display:swap;src:url("../fonts/roboto-300-latin.woff2") format("woff2")}
+@font-face{font-family:"Roboto";font-style:normal;font-weight:400;font-display:swap;src:url("../fonts/roboto-400-latin.woff2") format("woff2")}
+@font-face{font-family:"Roboto";font-style:normal;font-weight:500;font-display:swap;src:url("../fonts/roboto-500-latin.woff2") format("woff2")}
+@font-face{font-family:"Roboto";font-style:normal;font-weight:700;font-display:swap;src:url("../fonts/roboto-700-latin.woff2") format("woff2")}
+@font-face{font-family:"Roboto Condensed";font-style:normal;font-weight:300;font-display:swap;src:url("../fonts/roboto-condensed-300-latin.woff2") format("woff2")}
+@font-face{font-family:"Roboto Condensed";font-style:normal;font-weight:400;font-display:swap;src:url("../fonts/roboto-condensed-400-latin.woff2") format("woff2")}
+@font-face{font-family:"Roboto Condensed";font-style:normal;font-weight:700;font-display:swap;src:url("../fonts/roboto-condensed-700-latin.woff2") format("woff2")}
+
+/* acumin-pro-condensed -> Roboto Condensed */
+@font-face{font-family:"acumin-pro-condensed";font-weight:300;font-display:swap;src:url("../fonts/roboto-condensed-300-latin.woff2") format("woff2")}
+@font-face{font-family:"acumin-pro-condensed";font-weight:400;font-display:swap;src:url("../fonts/roboto-condensed-400-latin.woff2") format("woff2")}
+@font-face{font-family:"acumin-pro-condensed";font-weight:500 900;font-display:swap;src:url("../fonts/roboto-condensed-700-latin.woff2") format("woff2")}
+/* Industry (headings) -> Roboto Condensed bold */
+@font-face{font-family:"Industry";font-weight:100 900;font-display:swap;src:url("../fonts/roboto-condensed-700-latin.woff2") format("woff2")}
+/* acumin-pro / acumin-pro-wide -> Roboto */
+@font-face{font-family:"acumin-pro";font-weight:300;font-display:swap;src:url("../fonts/roboto-300-latin.woff2") format("woff2")}
+@font-face{font-family:"acumin-pro";font-weight:400;font-display:swap;src:url("../fonts/roboto-400-latin.woff2") format("woff2")}
+@font-face{font-family:"acumin-pro";font-weight:500;font-display:swap;src:url("../fonts/roboto-500-latin.woff2") format("woff2")}
+@font-face{font-family:"acumin-pro";font-weight:600 900;font-display:swap;src:url("../fonts/roboto-700-latin.woff2") format("woff2")}
+@font-face{font-family:"acumin-pro-wide";font-weight:300 400;font-display:swap;src:url("../fonts/roboto-400-latin.woff2") format("woff2")}
+@font-face{font-family:"acumin-pro-wide";font-weight:500;font-display:swap;src:url("../fonts/roboto-500-latin.woff2") format("woff2")}
+@font-face{font-family:"acumin-pro-wide";font-weight:600 900;font-display:swap;src:url("../fonts/roboto-700-latin.woff2") format("woff2")}
+/* PF-Fuel-Grime (hero headline) -> Anton */
+@font-face{font-family:"PF-Fuel-Grime";font-weight:400;font-display:swap;src:url("../fonts/anton-latin.woff2") format("woff2")}

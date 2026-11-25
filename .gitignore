@@ -37,3 +37,8 @@ __pycache__/
 /shot-*.png
 /base-*.png
 /_*.png
+
+# Contains live credentials - never commit
+agent_deployment_instructions.md
+*.pem
+agent_deploy_key*

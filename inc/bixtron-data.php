@@ -167,6 +167,11 @@ function bx_top_categories( $limit = 12 ) {
     if ( ! taxonomy_exists( 'product_cat' ) ) {
         return array();
     }
+    $cache_key = 'bx_top_cats_' . (int) $limit;
+    $cached    = get_transient( $cache_key );
+    if ( is_array( $cached ) ) {
+        return $cached;
+    }
     $terms = get_terms( array(
         'taxonomy'   => 'product_cat',
         'parent'     => 0,
@@ -190,9 +195,10 @@ function bx_top_categories( $limit = 12 ) {
             'name'  => $t->name,
             'url'   => get_term_link( $t ),
             'count' => (int) $t->count,
-            'image' => bx_category_image( $t ),
+            'image' => bx_category_image( $t, 'woocommerce_single' ),
         );
     }
+    set_transient( $cache_key, $out, 12 * HOUR_IN_SECONDS );
     return $out;
 }
 
