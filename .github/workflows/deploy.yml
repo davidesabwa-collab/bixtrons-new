@@ -14,19 +14,22 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Package Theme Files
+      - name: Package Theme Code
         run: |
-          echo "Packaging latest theme files for new.bixtrons.com..."
-          # Exclude git, ci workflows, scratch scripts and large dumps
+          echo "Packaging theme code (templates, stylesheets, scripts, fonts)..."
           zip -r -q theme.zip . \
             -x ".git/*" \
             -x ".github/*" \
             -x "*.sql*" \
             -x "*.py" \
             -x "*.zip" \
-            -x "*.tar*" \
-            -x "node_modules/*"
-          echo "Theme package created: $(ls -lh theme.zip | awk '{print $5}')"
+            -x "*.gz" \
+            -x "*.log" \
+            -x "*.tmp" \
+            -x "node_modules/*" \
+            -x "assets/images/*" \
+            -x "hello-elementor-pip/assets/images/*"
+          echo "Theme package size: $(ls -lh theme.zip | awk '{print $5}')"
 
       - name: Deploy Instantly to new.bixtrons.com
         run: |
