@@ -6,7 +6,12 @@ vendor/
 *.zip
 *.tar.gz
 *.sql
+*.sql.gz
 *.log
+*.tmp
+
+# Deployment scratch scripts
+*.py
 
 # OS generated files
 .DS_Store
@@ -23,3 +28,5 @@ desktop.ini
 .env
 .env.local
 .env.*.local
+
+__pycache__/

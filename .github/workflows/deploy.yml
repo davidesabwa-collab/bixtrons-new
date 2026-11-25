@@ -1,4 +1,4 @@
-name: Deploy to Live Server (new.bixtrons.com)
+name: Instant Automated Deployment to new.bixtrons.com
 
 on:
   push:
@@ -7,53 +7,52 @@ on:
 
 jobs:
   deploy:
-    name: Continuous Deployment
+    name: Deploy to Live Server
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Verify Code Structure
+      - name: Package Theme Files
         run: |
-          echo "Preparing deployment package for new.bixtrons.com..."
-          ls -la
-          echo "Theme assets and templates verified."
+          echo "Packaging latest theme files for new.bixtrons.com..."
+          # Exclude git, ci workflows, scratch scripts and large dumps
+          zip -r -q theme.zip . \
+            -x ".git/*" \
+            -x ".github/*" \
+            -x "*.sql*" \
+            -x "*.py" \
+            -x "*.zip" \
+            -x "*.tar*" \
+            -x "node_modules/*"
+          echo "Theme package created: $(ls -lh theme.zip | awk '{print $5}')"
 
-      - name: Trigger cPanel Git Deployment Webhook
-        if: ${{ env.CPANEL_WEBHOOK != '' }}
-        env:
-          CPANEL_WEBHOOK: ${{ secrets.CPANEL_WEBHOOK_URL }}
+      - name: Deploy Instantly to new.bixtrons.com
         run: |
-          echo "Triggering cPanel automatic Git deployment..."
-          curl -s -S -X GET "$CPANEL_WEBHOOK"
-          echo "cPanel deployment triggered successfully."
+          echo "Deploying to https://new.bixtrons.com/auto_deploy.php ..."
+          RESPONSE=$(curl -f -s -S -X POST "https://new.bixtrons.com/auto_deploy.php" \
+            -H "X-Deploy-Token: ${{ secrets.DEPLOY_TOKEN }}" \
+            -H "Content-Type: application/zip" \
+            --data-binary @theme.zip)
+          echo "Server response: $RESPONSE"
 
-      - name: Deploy via FTP / FTPS
-        if: ${{ env.FTP_SERVER != '' && env.FTP_USERNAME != '' }}
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        env:
-          FTP_SERVER: ${{ secrets.FTP_SERVER }}
-          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
-        with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: ${{ secrets.FTP_TARGET_DIR || '/public_html/new/wp-content/themes/hello-elementor-pip/' }}
-          local-dir: ./hello-elementor-pip/
+      - name: Purge Cloudflare Cache
+        run: |
+          echo "Purging Cloudflare edge cache..."
+          CF_RES=$(curl -f -s -S -X POST "https://api.cloudflare.com/client/v4/zones/${{ secrets.CF_ZONE_ID }}/purge_cache" \
+            -H "Authorization: Bearer ${{ secrets.CF_API_TOKEN }}" \
+            -H "Content-Type: application/json" \
+            --data '{"purge_everything":true}')
+          echo "Cloudflare response: $CF_RES"
 
-      - name: Deploy via SSH
-        if: ${{ env.SSH_HOST != '' && env.SSH_KEY != '' }}
-        uses: appleboy/ssh-action@v1.2.0
-        env:
-          SSH_HOST: ${{ secrets.SSH_HOST }}
-          SSH_KEY: ${{ secrets.SSH_KEY }}
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          port: 7202
-          username: ${{ secrets.SSH_USER || 'bixtrons' }}
-          key: ${{ secrets.SSH_KEY }}
-          script: |
-            TARGET="/home/bixtrons/public_html/new/wp-content/themes/hello-elementor-pip"
-            mkdir -p "$TARGET"
-            echo "Deployed latest commit to $TARGET"
+      - name: Live Smoke Test
+        run: |
+          echo "Verifying live site status..."
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" "https://new.bixtrons.com/")
+          echo "Live HTTP Status: $STATUS"
+          if [ "$STATUS" -ne 200 ]; then
+            echo "Deployment verification failed with status $STATUS"
+            exit 1
+          fi
+          echo "Deployment verified successfully! Live at https://new.bixtrons.com/"
