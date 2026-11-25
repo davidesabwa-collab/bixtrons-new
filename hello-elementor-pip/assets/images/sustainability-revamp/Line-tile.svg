@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 107.7 134.33">
+  <!-- Single repeat unit of Line.svg's chevron stripe (107.7 wide, matching the
+       original artwork's translation offset). The second polygon is the first
+       shifted left by one full repeat width, reproducing the sliver that the
+       previous chevron would otherwise bleed into this tile, so background-repeat-x
+       reconstructs the pattern seamlessly with no gaps at the tile edges. -->
+  <polygon fill="#e10a02" points="0 134.33 55.5 134.33 112.11 0 56.61 0"/>
+  <polygon fill="#e10a02" points="-107.7 134.33 -52.2 134.33 4.41 0 -51.09 0"/>
+</svg>

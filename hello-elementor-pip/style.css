@@ -1,0 +1,435 @@
+/*
+Theme Name: Hello Elementor Child - PIP Global Replica
+Theme URI: https://pipglobal.com/
+Description: Complete 100% pixel-perfect mirror clone of PIP Global (Protective Industrial Products) built as a child theme for Hello Elementor. Features all 15 mirror pages (Homepage, Careers, Contact Us, Legal & Compliance, Global Locations, Sustainability, and all 9 Industrial Channels), responsive navigation, vector branding, self-hosted fonts, interactive JavaScript animations, and full Elementor builder support.
+Author: Antigravity
+Author URI: https://bixtrons.com/
+Template: hello-elementor
+Version: 1.0.0
+Text Domain: hello-elementor-pip
+*/
+
+/* CSS Variables */
+:root {
+  --pip-red: #c8102e;
+  --pip-dark-red: #a50d24;
+  --pip-yellow: #ffb81c;
+  --pip-dark: #111827;
+  --pip-slate: #1f2937;
+  --pip-gray: #6b7280;
+  --pip-light-gray: #f3f4f6;
+  --pip-gray-border: #e5e7eb;
+}
+
+/* Base Resets & Layout */
+html {
+  scroll-behavior: smooth;
+  font-family: 'Roboto', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  color: #111827;
+  background-color: #ffffff;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  padding-top: 72px !important;
+  overflow-x: hidden;
+}
+
+/* Scroll To Top Button */
+.scrollToTop {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  width: 44px;
+  height: 44px;
+  background: var(--pip-red);
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 99999;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.25);
+  transition: all 0.3s ease;
+}
+
+.scrollToTop:hover {
+  background: var(--pip-dark-red);
+  transform: translateY(-2px);
+}
+
+.scrollToTop i {
+  color: #ffffff;
+  font-size: 16px;
+}
+
+/* Elementor Full Width Compatibility */
+.elementor-page .site-content {
+  width: 100%;
+  max-width: 100%;
+}
+
+/* Ensure animation elements become visible once in view */
+.animation-element.in-view {
+  opacity: 1 !important;
+  transform: translateY(0px) !important;
+}
+
+/* ==========================================================================
+   HEADER & NAVIGATION - 100% PIP GLOBAL MIRROR ARCHITECTURE
+   ========================================================================== */
+
+/* 1. Fixed Header Container */
+header.site-header {
+  display: block !important;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  height: 72px !important;
+  margin: 0 !important;
+  padding: 0 5% !important;
+  box-sizing: border-box !important;
+  background: #ffffff !important;
+  z-index: 10000 !important;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08) !important;
+  transition: all 0.2s ease-in-out !important;
+}
+
+header.site-header * {
+  box-sizing: border-box !important;
+}
+
+/* 2. Header Bottom White Border */
+.site-header .header-bottom-border {
+  position: absolute !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  width: 100% !important;
+  height: 15px !important;
+  background: #ffffff !important;
+  pointer-events: none !important;
+  z-index: 1001 !important;
+}
+
+/* 3. Navigation Wrapper */
+.site-header .site-header__site-nav {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  width: 100% !important;
+  height: 72px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  position: relative !important;
+  z-index: 10 !important;
+}
+
+/* 4. Desktop Red Left Logo Cutout */
+.site-header .nav-pip-global {
+  display: block !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 16rem !important; /* 256px */
+  height: 91.2px !important;
+  z-index: 1005 !important;
+  line-height: 0 !important;
+}
+
+.site-header .nav-pip-global img {
+  display: block !important;
+  width: 100% !important;
+  height: auto !important;
+}
+
+/* 5. Center Logo Container: COMPLETELY HIDE ON DESKTOP */
+.site-header .site-header__site-nav .site-nav__nav-center .nav-center__logo-container,
+.site-header .site-nav__nav-center .nav-center__logo-container,
+.site-header .nav-center__logo-container,
+.site-nav__nav-center li.nav-center__logo-container {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  width: 0 !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  pointer-events: none !important;
+}
+
+.site-header .site-header__site-nav .site-nav__nav-center .nav-center__logo-container .logo-container__logo {
+  display: none !important;
+  background: none !important;
+  filter: none !important;
+}
+
+/* Hide mobile hamburger toggle on desktop */
+.site-header .mobile-nav-toggle {
+  display: none !important;
+}
+
+/* 6. Navigation Items Bar */
+.site-header .site-nav__nav-center {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  gap: 0 max(2rem, 4.5vw) !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  list-style: none !important;
+  height: 72px !important;
+  width: 100% !important;
+  position: relative !important;
+}
+
+.site-header .site-nav__nav-center > li {
+  position: relative !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  height: 72px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  list-style: none !important;
+  cursor: pointer !important;
+}
+
+.site-header .site-nav__nav-center > li > span,
+.site-header .site-nav__nav-center > li > a {
+  font-family: 'Roboto Condensed', Arial, sans-serif !important;
+  font-size: 1.25rem !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  color: #5e5e5e !important;
+  letter-spacing: 0.5px !important;
+  line-height: 1 !important;
+  text-decoration: none !important;
+  cursor: pointer !important;
+  white-space: nowrap !important;
+  transition: color 0.2s ease !important;
+}
+
+.site-header .site-nav__nav-center > li:hover > span,
+.site-header .site-nav__nav-center > li:hover > a {
+  color: var(--pip-red) !important;
+}
+
+/* 7. Desktop Hover Dropdowns */
+.site-header .site-nav__nav-center > li > ul {
+  position: absolute !important;
+  top: 100% !important;
+  left: 50% !important;
+  transform: translateX(-50%) translateY(-10px) !important;
+  background: rgba(0, 0, 0, 0.88) !important;
+  min-width: 230px !important;
+  padding: 8px 0 !important;
+  margin: 0 !important;
+  list-style: none !important;
+  border-radius: 4px !important;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35) !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  transition: all 0.25s ease-in-out !important;
+  z-index: 99999 !important;
+}
+
+.site-header .site-nav__nav-center > li:hover > ul,
+.site-header .site-nav__nav-center > li > ul.menu-open {
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+  transform: translateX(-50%) translateY(0) !important;
+}
+
+.site-header .site-nav__nav-center > li > ul > li {
+  padding: 0 !important;
+  margin: 0 !important;
+  list-style: none !important;
+  text-align: left !important;
+  background: transparent !important;
+}
+
+.site-header .site-nav__nav-center > li > ul > li > a {
+  display: block !important;
+  padding: 10px 20px !important;
+  color: #ffffff !important;
+  font-family: 'Roboto', Arial, sans-serif !important;
+  font-size: 0.95rem !important;
+  font-weight: 400 !important;
+  text-transform: none !important;
+  text-decoration: none !important;
+  transition: background 0.15s ease, color 0.15s ease !important;
+}
+
+.site-header .site-nav__nav-center > li > ul > li > a:hover {
+  background: var(--pip-red) !important;
+  color: #ffffff !important;
+}
+
+/* 8. Regions World Map Modal */
+.site-header #locations-dropdown {
+  position: absolute !important;
+  top: 100% !important;
+  left: 0 !important;
+  right: 0 !important;
+  width: 100% !important;
+  background: rgba(0, 0, 0, 0.92) !important;
+  padding: 3rem 5% !important;
+  box-sizing: border-box !important;
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  transition: all 0.3s ease-in-out !important;
+  z-index: 999999 !important;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5) !important;
+}
+
+.site-header #locations-dropdown.menu-open {
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+}
+
+.site-header #locations-dropdown .exitlanguages {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 36px !important;
+  height: 36px !important;
+  position: absolute !important;
+  top: 20px !important;
+  right: 25px !important;
+  cursor: pointer !important;
+  z-index: 1000000 !important;
+  color: #ffffff !important;
+  font-size: 24px !important;
+  font-weight: bold !important;
+  background: rgba(0, 0, 0, 0.5) !important;
+  border-radius: 50% !important;
+  transition: all 0.2s ease !important;
+}
+
+.site-header #locations-dropdown .exitlanguages:hover {
+  background: var(--pip-red) !important;
+}
+
+.site-header #locations-dropdown .exitlanguages:before {
+  content: "×" !important;
+  font-size: 28px !important;
+  line-height: 1 !important;
+  color: #ffffff !important;
+}
+
+/* ==========================================================================
+   MOBILE HEADER ARCHITECTURE (max-width: 800px)
+   Matches PIP Global Mobile Layout: Centered Logo on Row 1, Nav Items Row 2
+   ========================================================================== */
+@media (max-width: 800px) {
+  body {
+    padding-top: 130px !important;
+  }
+
+  header.site-header {
+    height: auto !important;
+    padding: 8px 12px 10px !important;
+  }
+
+  .site-header .site-header__site-nav {
+    height: auto !important;
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+
+  /* Hide Desktop Red Left Angle Logo */
+  .site-header .nav-pip-global {
+    display: none !important;
+  }
+
+  /* Display Centered Brand Logo (Row 1) */
+  .site-header .site-header__site-nav .site-nav__nav-center .nav-center__logo-container,
+  .site-header .site-nav__nav-center .nav-center__logo-container {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    order: 1 !important;
+    flex: 0 0 100% !important;
+    width: 100% !important;
+    justify-content: center !important;
+    align-items: center !important;
+    height: 52px !important;
+    padding: 0 0 6px 0 !important;
+    margin: 0 !important;
+    pointer-events: auto !important;
+  }
+
+  .site-header .site-header__site-nav .site-nav__nav-center .nav-center__logo-container .logo-container__logo {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: none !important;
+    filter: none !important;
+    position: static !important;
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  .site-header .site-header__site-nav .site-nav__nav-center .nav-center__logo-container .logo-container__logo img {
+    height: 42px !important;
+    width: auto !important;
+    max-width: 220px !important;
+    display: block !important;
+  }
+
+  /* Navigation Items Bar (Row 2 wraps under Row 1 logo) */
+  .site-header .site-nav__nav-center {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    gap: 0 !important;
+  }
+
+  .site-header .site-nav__nav-center > li.parent-link {
+    order: 2 !important;
+    flex: 1 1 25% !important;
+    text-align: center !important;
+    height: auto !important;
+    padding: 6px 2px !important;
+    display: flex !important;
+    justify-content: center !important;
+  }
+
+  .site-header .site-nav__nav-center > li > span,
+  .site-header .site-nav__nav-center > li > a {
+    font-size: 0.85rem !important;
+    font-weight: 600 !important;
+    white-space: normal !important;
+    text-align: center !important;
+    line-height: 1.15 !important;
+  }
+
+  /* Submenus on Mobile */
+  .site-header .site-nav__nav-center > li > ul {
+    left: 0 !important;
+    transform: translateY(0) !important;
+    min-width: 180px !important;
+  }
+}

@@ -1,0 +1,54 @@
+name: Deploy to Live Server (new.bixtrons.com)
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: Deploy Theme to new.bixtrons.com
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      # 1. Option A: cPanel Git Webhook Trigger (if CPANEL_WEBHOOK_URL is set in GitHub Secrets)
+      - name: Trigger cPanel Git Deployment Webhook
+        if: "${{ secrets.CPANEL_WEBHOOK_URL != '' }}"
+        env:
+          CPANEL_WEBHOOK: ${{ secrets.CPANEL_WEBHOOK_URL }}
+        run: |
+          echo "Triggering cPanel automatic Git deployment..."
+          curl -s -S -X GET "$CPANEL_WEBHOOK"
+          echo "cPanel deployment triggered successfully."
+
+      # 2. Option B: Direct FTP/FTPS Deployment (if FTP_SERVER & FTP_USERNAME are set in GitHub Secrets)
+      - name: Sync Theme via FTP / FTPS
+        if: "${{ secrets.FTP_SERVER != '' && secrets.FTP_USERNAME != '' }}"
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          port: ${{ secrets.FTP_PORT || 21 }}
+          protocol: ${{ secrets.FTP_PROTOCOL || 'ftp' }}
+          local-dir: ./hello-elementor-pip/
+          server-dir: ${{ secrets.FTP_TARGET_DIR || '/public_html/new/wp-content/themes/hello-elementor-pip/' }}
+          dangerous-clean-slate: false
+
+      # 3. Option C: SSH Deployment (if SSH_HOST & SSH_KEY are set in GitHub Secrets)
+      - name: Deploy via SSH
+        if: "${{ secrets.SSH_HOST != '' && secrets.SSH_KEY != '' }}"
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          port: ${{ secrets.SSH_PORT || 7202 }}
+          username: ${{ secrets.SSH_USER || 'bixtrons' }}
+          key: ${{ secrets.SSH_KEY }}
+          passphrase: ${{ secrets.SSH_PASSPHRASE }}
+          script: |
+            TARGET="/home/bixtrons/public_html/new/wp-content/themes/hello-elementor-pip"
+            mkdir -p "$TARGET"
+            echo "Deploying update to new.bixtrons.com..."
