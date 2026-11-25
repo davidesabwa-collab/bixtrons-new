@@ -101,4 +101,4 @@ jobs:
             done
           } | sort -u > urls.txt
           echo "Warming $(wc -l < urls.txt) URLs..."
-          timeout 600 xargs -P 6 -n 1 curl -s -o /dev/null --max-time 120 -w "%{http_code} %{time_total}s %{url_effective}\n" < urls.txt | sort | uniq -c -w4 | head -5
+          timeout 900 xargs -P 3 -n 1 curl -s -o /dev/null --max-time 120 -w "%{http_code} %{time_total}s %{url_effective}\n" < urls.txt | sort | uniq -c -w4 | head -5

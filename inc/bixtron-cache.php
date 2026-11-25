@@ -4,7 +4,7 @@
  * installed as wp-content/advanced-cache.php and serves cached pages before WordPress and plugins load.
  *
  * Only anonymous GET requests for public pages are cached. Never cached: logged-in users, any request with
- * a WooCommerce cart/session cookie, cart, checkout, my-account, request-quote, search, 404s, REST, AJAX,
+ * a non-empty cart or quote list (cookies), cart, checkout, my-account, request-quote, search, 404s, REST, AJAX,
  * or URLs with query strings (other than tracking parameters).
  *
  * Cache entries are keyed by host + path + build id + generation, so a deploy (new build id) or any purge
@@ -33,7 +33,7 @@ function bx_cache_key( $host, $path ) {
 
 function bx_cache_bypass_cookie() {
     foreach ( array_keys( $_COOKIE ) as $name ) {
-        if ( preg_match( '/^(wordpress_logged_in|wordpress_sec|wp-postpass|comment_author|woocommerce_items_in_cart|woocommerce_cart_hash|wp_woocommerce_session|yith_ywraq|bx_nocache)/', $name ) ) {
+        if ( preg_match( '/^(wordpress_logged_in|wordpress_sec|wp-postpass|comment_author|woocommerce_items_in_cart|woocommerce_cart_hash|yith_ywraq_items_in_raq|yith_ywraq_hash|bx_nocache)/', $name ) ) {
             return true;
         }
     }

@@ -35,9 +35,10 @@ if ( ! defined( 'ABSPATH' ) ) {
             }
         }
     }
-    // Logged-in users, carts, sessions and quote lists get live pages.
+    // Logged-in users and visitors with items in their cart or quote list get live pages.
+    // (Plain WooCommerce/YITH session cookies are given to every visitor, so they do not bypass the cache.)
     foreach ( array_keys( $_COOKIE ) as $name ) {
-        if ( preg_match( '/^(wordpress_logged_in|wordpress_sec|wp-postpass|comment_author|woocommerce_items_in_cart|woocommerce_cart_hash|wp_woocommerce_session|yith_ywraq|bx_nocache)/', $name ) ) {
+        if ( preg_match( '/^(wordpress_logged_in|wordpress_sec|wp-postpass|comment_author|woocommerce_items_in_cart|woocommerce_cart_hash|yith_ywraq_items_in_raq|yith_ywraq_hash|bx_nocache)/', $name ) ) {
             return;
         }
     }
